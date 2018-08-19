@@ -1,15 +1,23 @@
 {
- "name": "grapes",
+ "name": "Heather Bellini",
  "children": 
  [
    {
-     "name": "cluster",
+     "name": "cloud",
      "children": 
      [
-      {"name": "AgglomerativeCluster", "size": 3938},
-      {"name": "CommunityStructure", "size": 3812},
-      {"name": "HierarchicalCluster", "size": 6714},
-      {"name": "MergeEdge", "size": 743}
+      {"name": "profitability", "size": 3938},
+      {"name": "gross margins", "size": 3812},
+      {"name": "growth", "size": 6714},
+      {"name": "revenue", "size": 743}
+     ]
+    },
+  {
+     "name": "enterprise side",
+     "children": 
+     [
+      {"name": "expenses", "size": 3938},
+      {"name": "assets", "size": 3812}
      ]
     }
  ]
