@@ -64,7 +64,7 @@
             .style('height', '100vh')
             .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
-        d3.json('https://poojakabber.github.io/flare1.json', (error, root) => {
+        d3.json('https://poojakabber.github.io/flare_ndaq.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
