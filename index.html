@@ -1,168 +1,170 @@
-<head>
-    <style>
-        body {
-            font-family: Sans-serif;
-            font-size: 11px;
-        }
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
 
-        .slice {
-            cursor: pointer;
-        }
+.node {
+  cursor: pointer;
+}
 
-        .slice .main-arc {
-            stroke: #fff;
-            stroke-width: 1px;
-        }
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
 
-        .slice .hidden-arc {
-            fill: none;
-        }
+.node text {
+  font: 10px sans-serif;
+}
 
-        .slice text {
-            pointer-events: none;
-            dominant-baseline: middle;
-            text-anchor: middle;
-        }
-    </style>
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
 
-    <script src='https://d3js.org/d3.v4.min.js'></script>
-</head>
+</style>
 <body>
-    <script>
-        const width = window.innerWidth,
-            height = window.innerHeight,
-            maxRadius = (Math.min(width, height) / 2) - 5;
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
 
-        const formatNumber = d3.format(',d');
+var margin = {top: 20, right: 120, bottom: 20, left: 120},
+    width = 960 - margin.right - margin.left,
+    height = 800 - margin.top - margin.bottom;
 
-        const x = d3.scaleLinear()
-            .range([0, 2 * Math.PI])
-            .clamp(true);
+var i = 0,
+    duration = 750,
+    root;
 
-        const y = d3.scaleSqrt()
-            .range([maxRadius*.1, maxRadius]);
+var tree = d3.layout.tree()
+    .size([height, width]);
 
-        const color = d3.scaleOrdinal(d3.schemeCategory20);
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
 
-        const partition = d3.partition();
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        const arc = d3.arc()
-            .startAngle(d => x(d.x0))
-            .endAngle(d => x(d.x1))
-            .innerRadius(d => Math.max(0, y(d.y0)))
-            .outerRadius(d => Math.max(0, y(d.y1)));
+d3.json("https://poojakabber.github.io/flare1.json", function(error, flare) {
+  if (error) throw error;
 
-        const middleArcLine = d => {
-            const halfPi = Math.PI/2;
-            const angles = [x(d.x0) - halfPi, x(d.x1) - halfPi];
-            const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
+  root = flare;
+  root.x0 = height / 2;
+  root.y0 = 0;
 
-            const middleAngle = (angles[1] + angles[0]) / 2;
-            const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
-            if (invertDirection) { angles.reverse(); }
+  function collapse(d) {
+    if (d.children) {
+      d._children = d.children;
+      d._children.forEach(collapse);
+      d.children = null;
+    }
+  }
 
-            const path = d3.path();
-            path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-            return path.toString();
-        };
+  root.children.forEach(collapse);
+  update(root);
+});
 
-        const textFits = d => {
-            const CHAR_SPACE = 6;
+d3.select(self.frameElement).style("height", "800px");
 
-            const deltaAngle = x(d.x1) - x(d.x0);
-            const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
-            const perimeter = r * deltaAngle;
+function update(source) {
 
-            return d.data.name.length * CHAR_SPACE < perimeter;
-        };
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse(),
+      links = tree.links(nodes);
 
-        const svg = d3.select('body').append('svg')
-            .style('width', '100vw')
-            .style('height', '100vh')
-            .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
-            .on('click', () => focusOn()); // Reset zoom on canvas click
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
 
-        d3.json('https://poojakabber.github.io/flare1.json', (error, root) => {
-            if (error) throw error;
+  // Update the nodes…
+  var node = svg.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-            root = d3.hierarchy(root);
-            root.sum(d => d.size);
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", click);
 
-            const slice = svg.selectAll('g.slice')
-                .data(partition(root).descendants());
+  nodeEnter.append("circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-            slice.exit().remove();
+  nodeEnter.append("text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
 
-            const newSlice = slice.enter()
-                .append('g').attr('class', 'slice')
-                .on('click', d => {
-                    d3.event.stopPropagation();
-                    focusOn(d);
-                });
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
-            newSlice.append('title')
-                .text(d => d.data.name + '\n' + formatNumber(d.value));
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-            newSlice.append('path')
-                .attr('class', 'main-arc')
-                .style('fill', d => color((d.children ? d : d.parent).data.name))
-                .attr('d', arc);
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
 
-            newSlice.append('path')
-                .attr('class', 'hidden-arc')
-                .attr('id', (_, i) => `hiddenArc${i}`)
-                .attr('d', middleArcLine);
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
 
-            const text = newSlice.append('text')
-                .attr('display', d => textFits(d) ? null : 'none');
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
 
-            // Add white contour
-            text.append('textPath')
-                .attr('startOffset','50%')
-                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
-                .text(d => d.data.name)
-                .style('fill', 'none')
-                .style('stroke', '#fff')
-                .style('stroke-width', 5)
-                .style('stroke-linejoin', 'round');
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
 
-            text.append('textPath')
-                .attr('startOffset','50%')
-                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
-                .text(d => d.data.name);
-        });
+  // Update the links…
+  var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
 
-        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
-            // Reset to top-level if no data point specified
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      });
 
-            const transition = svg.transition()
-                .duration(750)
-                .tween('scale', () => {
-                    const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
-                        yd = d3.interpolate(y.domain(), [d.y0, 1]);
-                    return t => { x.domain(xd(t)); y.domain(yd(t)); };
-                });
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
 
-            transition.selectAll('path.main-arc')
-                .attrTween('d', d => () => arc(d));
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
 
-            transition.selectAll('path.hidden-arc')
-                .attrTween('d', d => () => middleArcLine(d));
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
 
-            transition.selectAll('text')
-                .attrTween('display', d => () => textFits(d) ? null : 'none');
+// Toggle children on click.
+function click(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+  update(d);
+}
 
-            moveStackToFront(d);
-
-            //
-
-            function moveStackToFront(elD) {
-                svg.selectAll('.slice').filter(d => d === elD)
-                    .each(function(d) {
-                        this.parentNode.appendChild(this);
-                        if (d.parent) { moveStackToFront(d.parent); }
-                    })
-            }
-        }
-    </script>
-</body>
+</script>
