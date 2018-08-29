@@ -76,6 +76,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d);
+                    createDiv();
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
@@ -112,6 +113,7 @@
                         yd = d3.interpolate(y.domain(), [d.y0, 1]);
                     return t => { x.domain(xd(t)); y.domain(yd(t)); };
                 });
+            
             transition.selectAll('path.main-arc')
                 .attrTween('d', d => () => arc(d));
             transition.selectAll('path.hidden-arc')
@@ -128,5 +130,14 @@
                     })
             }
         }
+		
+		function createDiv(){
+		
+		var d = document.createElement("div");
+		d.innerHTML = "HI";
+		document.body.appendChild(d);
+		
+		}
+		
     </script>
 </body>
