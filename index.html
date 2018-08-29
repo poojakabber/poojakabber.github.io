@@ -158,7 +158,7 @@
 			dataType: "json",
 			success: function(json_data)
 			{
-			
+				console.log("Inside success")
 				var div_elem_exists = document.getElementById("question_div");
 				if (div_elem_exists)
 				{
@@ -173,15 +173,15 @@
 				data_array = json_data.children;
 				
 				for(var j = 0; j < data_array.length; j++){
-				
+					console.log("Inside first loop of data array")
 					if (data_array[j].name == this.data_name_ajax){
-					
+							console.log("If they match")
 							var x = '';
 							for (var k = 0; k < data_array[j].questions.length; k++)
 							{
 								x = x + "<br>" + data_array[j].questions[k];
 							}
-					
+							console.log("x: ", x)
 							// var x = data_array[j].questions;
 							div_elem.innerHTML = x;
 							document.body.appendChild(div_elem);
