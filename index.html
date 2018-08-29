@@ -136,9 +136,14 @@
 		function displayAll(data){
 		
 			var div_elem = document.createElement("div");
-			div_elem.innerHTML = data.children[0].name;
-			document.body.appendChild(div_elem);
-		
+			data_array = data.children[0].name;
+			data_array.forEach(function(arrayItem){
+			
+				var x = arrayItem.children;
+				div_elem.innerHTML = x;
+				document.body.appendChild(div_elem);
+			
+			})
 		}
 	    
 	    	function error_fn(error){
