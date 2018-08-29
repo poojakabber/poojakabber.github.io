@@ -176,7 +176,13 @@
 				
 					if (data_array[j].name == this.data_name_ajax){
 					
-							var x = data_array[j].questions;
+							var x = '';
+							for (var k = 0; k < data_array[j].questions; k++)
+							{
+								x = x + "<br>" + data_array[j].questions[k];
+							}
+					
+							// var x = data_array[j].questions;
 							div_elem.innerHTML = x;
 							document.body.appendChild(div_elem);
 						
