@@ -135,15 +135,7 @@
 	    
 		function displayAll(data){
 		
-			var div_elem = document.createElement("div");
-			data_array = data.children[0].name;
-			data_array.forEach(function(arrayItem){
 			
-				var x = arrayItem.children;
-				div_elem.innerHTML = x;
-				document.body.appendChild(div_elem);
-			
-			})
 		}
 	    
 	    	function error_fn(error){
@@ -153,11 +145,29 @@
 		
 		function createDiv(d){
 		
+		var data_name = d.data.name;
+		
 		$.ajax({
 			url: 'https://poojakabber.github.io/flare_heather_questions.json',
 			type: 'GET',
 			dataType: "json",
-			success: displayAll,
+			success: function(data, data_name)
+			{
+				alert(this.data + "," + this.url); 
+				var div_elem = document.createElement("div");
+				data_array = data.children[0].name;
+				data_array.forEach(function(arrayItem){
+			
+					if arrayItem.name == data_name{
+					
+						var x = arrayItem.children;
+						div_elem.innerHTML = x;
+						document.body.appendChild(div_elem);
+					
+					}
+			
+				})
+			},
 			error: error_fn
 		    });
 		
