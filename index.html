@@ -140,6 +140,11 @@
 			document.body.appendChild(div_elem);
 		
 		}
+	    
+	    	function error_fn(error){
+		
+			alert(error);
+		}
 		
 		function createDiv(d){
 		
@@ -147,7 +152,8 @@
 			url: 'https://poojakabber.github.io/flare_heather_questions.json',
 			type: 'GET',
 			dataType: "json",
-			success: displayAll
+			success: displayAll,
+			error: error_fn
 		    });
 		
 		}
