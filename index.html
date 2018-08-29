@@ -136,7 +136,7 @@
 		function displayAll(data){
 		
 			var div_elem = document.createElement("div");
-			div_elem.innerHTML = data.children;
+			div_elem.innerHTML = data.children[0].name;
 			document.body.appendChild(div_elem);
 		
 		}
