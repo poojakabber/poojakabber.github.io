@@ -153,24 +153,23 @@
 			dataType: "json",
 			success: function(data, data_name)
 			{
-				alert(this.data + "," + this.url); 
 				var div_elem = document.createElement("div");
-				data_array = data.children[0].name;
+				data_array = data.children;
 				
 				for(var j = 0; j < data_array.length; j++){
 				
 					if data_array[j].name == data_name{
 						
-							var x = data_array[j].children;
+							var x = data_array[j].questions;
 							div_elem.innerHTML = x;
 							document.body.appendChild(div_elem);
 						
-					}
+					};
 				
-				}
+				};
 			},
 			error: error_fn
-		    });
+		});
 		
 		}
 		
