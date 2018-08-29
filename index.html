@@ -22,7 +22,7 @@
     </style>
 
     <script src='https://d3js.org/d3.v4.min.js'></script>
-	<script type="text/javascript" src="https://poojakabber.github.io/flare_heather_questions.json"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 </head>
 <body>
@@ -132,14 +132,23 @@
                     })
             }
         }
+	    
+		function displayAll(data){
+		
+			var div_elem = document.createElement("div");
+			div_elem.innerHTML = data;
+			document.body.appendChild(div_elem);
+		
+		}
 		
 		function createDiv(d){
 		
-		var json_data = JSON.parse(data);
-		
-		var div_elem = document.createElement("div");
-		div_elem.innerHTML = json_data;
-		document.body.appendChild(div_elem);
+		$.ajax({
+			url: 'https://poojakabber.github.io/flare_heather_questions.json',
+			type: 'GET',
+			dataType: "json",
+			success: displayAll
+		    });
 		
 		}
 		
