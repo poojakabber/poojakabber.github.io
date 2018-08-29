@@ -133,10 +133,10 @@
             }
         }
 	    
-		function displayAll(data){
+		function displayAll(json_data){
 		
 			var div_elem = document.createElement("div");
-			div_elem.innerHTML = data.questions;
+			div_elem.innerHTML = json_data.data;
 			document.body.appendChild(div_elem);
 		
 		}
