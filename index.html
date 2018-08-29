@@ -76,7 +76,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d);
-                    createDiv();
+                    createDiv(d);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
@@ -131,11 +131,11 @@
             }
         }
 		
-		function createDiv(){
+		function createDiv(d){
 		
-		var d = document.createElement("div");
-		d.innerHTML = "HI";
-		document.body.appendChild(d);
+		var div_elem = document.createElement("div");
+		div_elem.innerHTML = d;
+		document.body.appendChild(div_elem);
 		
 		}
 		
