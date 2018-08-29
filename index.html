@@ -146,8 +146,9 @@
 		$.ajax({
 			url: 'https://poojakabber.github.io/flare_heather_questions.json',
 			type: 'GET',
+			data_name_ajax: data_name,
 			dataType: "json",
-			success: function(json_data, data_name)
+			success: function(json_data)
 			{
 				alert(data_name)
 				var div_elem = document.createElement("div");
@@ -156,7 +157,7 @@
 				for(var j = 0; j < data_array.length; j++){
 				
 					alert(data_array[j].name)
-					if (data_array[j].name == data_name){
+					if (data_array[j].name == this.data_name_ajax){
 					
 							alert(data_array[j].name)
 							var x = data_array[j].questions;
