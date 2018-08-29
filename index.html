@@ -33,8 +33,8 @@
 </head>
 <body>
     <script>
-        const width = window.innerWidth,
-            height = window.innerHeight,
+        const width = 1000,
+            height = 1000,
             maxRadius = (Math.min(width, height) / 2) - 5;
         const formatNumber = d3.format(',d');
         const x = d3.scaleLinear()
@@ -165,9 +165,9 @@
 			
 				var div_elem = document.createElement("div");
 				div_elem.setAttribute("id", "question_div");
-				div_elem.style.width = "500px";
-				div_elem.style.height = "500px";
-				div_elem.style.fontSize = "x-large";
+				div_elem.style.width = "1000px";
+				div_elem.style.height = "1000px";
+				div_elem.style.fontSize = "large";
 				data_array = json_data.children;
 				
 				for(var j = 0; j < data_array.length; j++){
