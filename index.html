@@ -136,7 +136,7 @@
 		function displayAll(json_data){
 		
 			var div_elem = document.createElement("div");
-			div_elem.innerHTML = json_data.data;
+			div_elem.innerHTML = json_data.data[0].name;
 			document.body.appendChild(div_elem);
 		
 		}
