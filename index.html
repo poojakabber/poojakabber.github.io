@@ -148,13 +148,16 @@
 			dataType: "json",
 			success: function(data, data_name)
 			{
+				alert(data_name)
 				var div_elem = document.createElement("div");
 				data_array = data.children;
 				
 				for(var j = 0; j < data_array.length; j++){
 				
+					alert(data_array[j].name)
 					if (data_array[j].name == data_name){
-						
+					
+							alert(data_array[j].name)
 							var x = data_array[j].questions;
 							div_elem.innerHTML = x;
 							document.body.appendChild(div_elem);
