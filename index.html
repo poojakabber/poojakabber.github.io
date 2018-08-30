@@ -74,6 +74,9 @@
             .style('height', '80vh')
             .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
+			
+		$svg..css({top: 200, left: 200, position:'absolute'});
+			
         d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
