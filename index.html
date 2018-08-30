@@ -34,6 +34,7 @@
 </head>
 <body>
 	<div id = "body_div">
+	</div>
     <script>
         const width = window.innerWidth,
             height = window.innerHeight,
@@ -69,13 +70,13 @@
             const perimeter = r * deltaAngle;
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
-        const svg = d3.select('body').append('svg')
+        const svg = d3.select('div').append('svg')
             .style('width', '80vw')
             .style('height', '80vh')
             .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
 			
-		$svg..css({top: 200, left: 200, position:'absolute'});
+		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
         d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
             if (error) throw error;
@@ -199,5 +200,4 @@
 		}
 		
     </script>
-	</div>
 </body>
