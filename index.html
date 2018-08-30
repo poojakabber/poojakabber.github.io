@@ -76,7 +76,7 @@
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
         const svg = d3.select('div').append('svg')
-            .style('width', '80vw')
+            .style('width', '60vw')
             .style('height', '80vh')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
