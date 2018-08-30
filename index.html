@@ -38,8 +38,7 @@
 	
 </head>
 <body>
-	<div id = "body_div">
-	</div>
+
     <script>
         const width = window.innerWidth,
             height = window.innerHeight,
@@ -75,7 +74,7 @@
             const perimeter = r * deltaAngle;
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
-        const svg = d3.select('div').append('svg')
+        const svg = d3.select('body').append('svg')
             .style('width', '50vw')
             .style('height', '100vh')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
@@ -176,9 +175,12 @@
 			
 				var div_elem = document.createElement("div");
 				div_elem.setAttribute("id", "question_div");
-				div_elem.style.width = "500px";
-				div_elem.style.height = "500px";
-				div_elem.style.fontSize = "medium";
+				div_elem.style.width = "40vw";
+				div_elem.style.height = "80vh";
+				div_elem.style.fontSize = "15px";
+				div_elem.style.float = "right";
+				div_elem.style.position = "relative";
+				div_elem.style.right = "10px";
 				data_array = json_data.children;
 				
 				//console.log(data_array)
