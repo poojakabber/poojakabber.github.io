@@ -94,7 +94,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d);
-                    //createDiv(d);
+                    createDiv(d);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
