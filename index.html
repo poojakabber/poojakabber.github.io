@@ -110,7 +110,7 @@
               .attr("class", "legend");
 
           legend.append("rect")
-            .attr("x", function(d, i) { return (legendElementWidth * i) + 500; })
+            .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
             .attr("y", -50)
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
@@ -119,7 +119,7 @@
           legend.append("text")
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
-            .attr("x", function(d, i) { return (legendElementWidth * i) + 500; })
+            .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
             .attr("y", -50 + gridSize);
 
           legend.exit().remove();
