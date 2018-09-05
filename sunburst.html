@@ -19,11 +19,26 @@
             dominant-baseline: middle;
             text-anchor: middle;
         }
+		
+		.question_div{
+			font-family: Sans-serif;
+			font-size:15px;
+		}
+		
+		div{
+			width: 1000;
+			height: 600;
+			position: absolute;
+		}
+		
     </style>
 
     <script src='https://d3js.org/d3.v4.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 </head>
 <body>
+
     <script>
         const width = window.innerWidth,
             height = window.innerHeight,
@@ -60,11 +75,14 @@
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
         const svg = d3.select('body').append('svg')
-            .style('width', '100vw')
+            .style('width', '50vw')
             .style('height', '100vh')
-            .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
+            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
-        d3.json('https://poojakabber.github.io/flare1.json', (error, root) => {
+			
+		//$svg.css({top: 200, left: 200, position:'absolute'});
+			
+        d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
@@ -76,6 +94,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d);
+                    createDiv(d);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
@@ -112,6 +131,7 @@
                         yd = d3.interpolate(y.domain(), [d.y0, 1]);
                     return t => { x.domain(xd(t)); y.domain(yd(t)); };
                 });
+            
             transition.selectAll('path.main-arc')
                 .attrTween('d', d => () => arc(d));
             transition.selectAll('path.hidden-arc')
@@ -128,5 +148,66 @@
                     })
             }
         }
+	    
+		function error_fn(error){
+		
+			alert(error);
+		}
+		
+		function createDiv(d){
+		
+		var data_name = d.data.name;
+		console.log(data_name);
+		
+		$.ajax({
+			url: 'https://poojakabber.github.io/flare_heather_questions.json',
+			type: 'GET',
+			data_name_ajax: data_name,
+			dataType: "json",
+			success: function(json_data)
+			{
+				console.log("Inside success")
+				var div_elem_exists = document.getElementById("question_div");
+				if (div_elem_exists)
+				{
+					div_elem_exists.remove();
+				}
+			
+				var div_elem = document.createElement("div");
+				div_elem.setAttribute("id", "question_div");
+				div_elem.style.width = "40vw";
+				div_elem.style.height = "80vh";
+				div_elem.style.fontSize = "15px";
+				div_elem.style.float = "right";
+				div_elem.style.position = "relative";
+				div_elem.style.right = "10px";
+				data_array = json_data.children;
+				
+				//console.log(data_array)
+				
+				for(var j = 0; j < data_array.length; j++){
+					console.log("Inside first loop of data array");
+					console.log(data_array[j].name, this.data_name_ajax);
+					if (data_array[j].name == this.data_name_ajax){
+							console.log("If they match")
+							var x = '';
+							for (var k = 0; k < data_array[j].questions.length; k++)
+							{
+								x = x + "<br><br>" + data_array[j].questions[k];
+							}
+							console.log("x: ", x)
+							// var x = data_array[j].questions;
+							div_elem.innerHTML = x;
+							document.body.appendChild(div_elem);
+						
+					};
+				
+				};
+			},
+			error: error_fn
+		});
+		
+		}
+		
     </script>
 </body>
