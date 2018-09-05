@@ -63,7 +63,7 @@
             .attr("x", function(d, i) { return i * gridSize; })
             .attr("y", -50)
             .style("text-anchor", "middle")
-            .attr("transform", "translate(" + gridSize / 2 + ", -6) rotate(90deg)")
+            .attr("transform", "translate(" + gridSize / 2 + ", -6)")
             //.attr("transform", "rotate(20deg)")
             .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
@@ -111,7 +111,7 @@
 
           legend.append("rect")
             .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height + 150)
+            .attr("y", height)
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
             .style("fill", function(d, i) { return colors[i]; });
@@ -120,7 +120,7 @@
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
             .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height + 150+ gridSize);
+            .attr("y", height + gridSize);
 
           legend.exit().remove();
 
