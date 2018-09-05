@@ -32,8 +32,8 @@
       var margin = { top: 100, right: 0, bottom: 100, left: 250 },
           width = 1500 - margin.left - margin.right,
           height = 1030 - margin.top - margin.bottom,
-          gridSize = Math.floor(width / 24),
-          legendElementWidth = gridSize/2,
+          gridSize = Math.floor(width / 20),
+          legendElementWidth = gridSize*2,
           buckets = 5,
           colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
           days = ['Adam Holt', 'Brent Thill', 'John DiFucci', 'Mark Moerdler', 'Phillip Winslow', 'Walter Pritchard', 'Heather Bellini', 'Ed Maguire', 'Gregg Moskowitz', 'Raimo Lenschow', 'Brad Reback', 'Phil Winslow', 'Rick Sherlund', 'Kash Rangan', 'Ross MacMillan', 'Brendan Barnicle', 'Karl Keirstead', 'Jason Maynard', 'Kirk Materne', 'Jim  Warren', 'Daniel Ives', 'Philip Winslow', 'Keith Weiss', 'Mark Murphy', 'Michael Turits'],
