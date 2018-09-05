@@ -1,7 +1,7 @@
 day	hour	value
-Heather	xbox	16
-Heather	microsoft	20
-Heather	revenue	0
-Phil	xbox	0
-Phil	microsoft	0
-Phil	revenue 2
+1	1	16
+1	2	20
+1	3	0
+2	1	0
+2	2	0
+2	3	2
