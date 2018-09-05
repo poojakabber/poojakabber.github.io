@@ -29,12 +29,12 @@
     <div id="dataset-picker">
     </div>
     <script type="text/javascript">
-      var margin = { top: 50, right: 0, bottom: 100, left: 100 },
-          width = 1200 - margin.left - margin.right,
-          height = 630 - margin.top - margin.bottom,
-          gridSize = Math.floor(width / 12),
+      var margin = { top: 200, right: 0, bottom: 100, left: 200 },
+          width = 1500 - margin.left - margin.right,
+          height = 1030 - margin.top - margin.bottom,
+          gridSize = Math.floor(width / 24),
           legendElementWidth = gridSize/2,
-          buckets = 9,
+          buckets = 5,
           colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
           days = ['Adam Holt', 'Brent Thill', 'John DiFucci', 'Mark Moerdler', 'Phillip Winslow', 'Walter Pritchard', 'Heather Bellini', 'Ed Maguire', 'Gregg Moskowitz', 'Raimo Lenschow', 'Brad Reback', 'Phil Winslow', 'Rick Sherlund', 'Kash Rangan', 'Ross MacMillan', 'Brendan Barnicle', 'Karl Keirstead', 'Jason Maynard', 'Kirk Materne', 'Jim  Warren', 'Daniel Ives', 'Philip Winslow', 'Keith Weiss', 'Mark Murphy', 'Michael Turits'],
           times = ['gross margin', 'commercial cloud', 'commercial licensing', 'growth rate', 'cloud business', 'cash flow', 'office 365', 'server product', 'constant currency', 'pc market', 'margin profile', 'licensing business', 'transactional business', 'market share', 'pc unit'];
