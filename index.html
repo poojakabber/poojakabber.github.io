@@ -110,8 +110,8 @@
               .attr("class", "legend");
 
           legend.append("rect")
-            .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height)
+            .attr("x", function(d, i) { return (legendElementWidth * i) + width; })
+            .attr("y", 0)
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
             .style("fill", function(d, i) { return colors[i]; });
@@ -119,8 +119,8 @@
           legend.append("text")
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
-            .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height + gridSize);
+            .attr("x", function(d, i) { return (legendElementWidth * i) + width; })
+            .attr("y", gridSize);
 
           legend.exit().remove();
 
