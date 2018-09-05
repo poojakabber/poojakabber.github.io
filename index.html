@@ -32,7 +32,7 @@
       var margin = { top: 100, right: 0, bottom: 100, left: 150 },
           width = 1500 - margin.left - margin.right,
           height = 1030 - margin.top - margin.bottom,
-          gridSize = Math.floor(width / 20),
+          gridSize = Math.floor(width / 24),
           legendElementWidth = gridSize*2,
           buckets = 5,
           colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
@@ -64,6 +64,7 @@
             .attr("y", -50)
             .style("text-anchor", "middle")
             .attr("transform", "translate(" + gridSize / 2 + ", -6)")
+            .attr("transform", "rotate(20deg)")
             .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
       var heatmapChart = function(tsvFile) {
