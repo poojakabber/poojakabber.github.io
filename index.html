@@ -29,7 +29,7 @@
     <div id="dataset-picker">
     </div>
     <script type="text/javascript">
-      var margin = { top: 500, right: 0, bottom: 100, left: 500 },
+      var margin = { top: 250, right: 0, bottom: 100, left: 250 },
           width = 1500 - margin.left - margin.right,
           height = 1030 - margin.top - margin.bottom,
           gridSize = Math.floor(width / 30),
@@ -50,7 +50,7 @@
           .data(days)
           .enter().append("text")
             .text(function (d) { return d; })
-            .attr("x", 0)
+            .attr("x", -50)
             .attr("y", function (d, i) { return i * gridSize; })
             .style("text-anchor", "end")
             .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
@@ -61,7 +61,7 @@
           .enter().append("text")
             .text(function(d) { return d; })
             .attr("x", function(d, i) { return i * gridSize; })
-            .attr("y", 0)
+            .attr("y", -50)
             .style("text-anchor", "middle")
             .attr("transform", "translate(" + gridSize / 2 + ", -6)")
             .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
