@@ -145,7 +145,7 @@
             .attr("x", -50)
             .attr("y", function (d, i) { return i * gridSize; })
             .style("text-anchor", "end")
-            .attr("transform", "translate(-6," + gridSize / 4 + ")")
+            .attr("transform", "translate(-12," + gridSize + ")")
             .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
 
       var timeLabels = svg.selectAll(".timeLabel")
@@ -155,7 +155,7 @@
             .attr("x", function(d, i) { return i * gridSize; })
             .attr("y", -50)
             .style("text-anchor", "middle")
-            .attr("transform", "translate(" + gridSize / 4 + ", -6)")
+            .attr("transform", "translate(" + gridSize + ", -12)")
             //.attr("transform", "rotate(20deg)")
             .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
