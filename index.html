@@ -82,7 +82,7 @@
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
-        d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
+        d3.json('https://poojakabber.github.io/flare_heather_citrix.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
@@ -160,7 +160,7 @@
 		console.log(data_name);
 		
 		$.ajax({
-			url: 'https://poojakabber.github.io/flare_heather_questions.json',
+			url: 'https://poojakabber.github.io/flare_heather_questions_citrix.json',
 			type: 'GET',
 			data_name_ajax: data_name,
 			dataType: "json",
