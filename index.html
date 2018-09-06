@@ -1,135 +1,213 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-.node {
-  cursor: pointer;
-}
-.node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-.node text {
-  font: 10px sans-serif;
-}
-.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}
-</style>
+<head>
+    <style>
+        body {
+            font-family: Sans-serif;
+            font-size: 11px;
+        }
+        .slice {
+            cursor: pointer;
+        }
+        .slice .main-arc {
+            stroke: #fff;
+            stroke-width: 1px;
+        }
+        .slice .hidden-arc {
+            fill: none;
+        }
+        .slice text {
+            pointer-events: none;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+		
+		.question_div{
+			font-family: Sans-serif;
+			font-size:15px;
+		}
+		
+		div{
+			width: 1000;
+			height: 600;
+			position: absolute;
+		}
+		
+    </style>
+
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+</head>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script>
-var margin = {top: 20, right: 120, bottom: 20, left: 120},
-    width = 960 - margin.right - margin.left,
-    height = 800 - margin.top - margin.bottom;
-var i = 0,
-    duration = 750,
-    root;
-var tree = d3.layout.tree()
-    .size([height, width]);
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-d3.json("https://poojakabber.github.io/flare_heather.json", function(error, flare) {
-  if (error) throw error;
-  root = flare;
-  root.x0 = height / 2;
-  root.y0 = 0;
-  function collapse(d) {
-    if (d.children) {
-      d._children = d.children;
-      d._children.forEach(collapse);
-      d.children = null;
-    }
-  }
-  root.children.forEach(collapse);
-  update(root);
-});
-d3.select(self.frameElement).style("height", "800px");
-function update(source) {
-  // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse(),
-      links = tree.links(nodes);
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 180; });
-  // Update the nodes…
-  var node = svg.selectAll("g.node")
-      .data(nodes, function(d) { return d.id || (d.id = ++i); });
-  // Enter any new nodes at the parent's previous position.
-  var nodeEnter = node.enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", click);
-  nodeEnter.append("circle")
-      .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-  nodeEnter.append("text")
-      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
-      .style("fill-opacity", 1e-6);
-  // Transition nodes to their new position.
-  var nodeUpdate = node.transition()
-      .duration(duration)
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-  nodeUpdate.select("circle")
-      .attr("r", 4.5)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-  nodeUpdate.select("text")
-      .style("fill-opacity", 1);
-  // Transition exiting nodes to the parent's new position.
-  var nodeExit = node.exit().transition()
-      .duration(duration)
-      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
-      .remove();
-  nodeExit.select("circle")
-      .attr("r", 1e-6);
-  nodeExit.select("text")
-      .style("fill-opacity", 1e-6);
-  // Update the links…
-  var link = svg.selectAll("path.link")
-      .data(links, function(d) { return d.target.id; });
-  // Enter any new links at the parent's previous position.
-  link.enter().insert("path", "g")
-      .attr("class", "link")
-      .attr("d", function(d) {
-        var o = {x: source.x0, y: source.y0};
-        return diagonal({source: o, target: o});
-      });
-  // Transition links to their new position.
-  link.transition()
-      .duration(duration)
-      .attr("d", diagonal);
-  // Transition exiting nodes to the parent's new position.
-  link.exit().transition()
-      .duration(duration)
-      .attr("d", function(d) {
-        var o = {x: source.x, y: source.y};
-        return diagonal({source: o, target: o});
-      })
-      .remove();
-  // Stash the old positions for transition.
-  nodes.forEach(function(d) {
-    d.x0 = d.x;
-    d.y0 = d.y;
-  });
-}
-// Toggle children on click.
-function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-  }
-  update(d);
-}
-</script>
+
+    <script>
+        const width = window.innerWidth,
+            height = window.innerHeight,
+            maxRadius = (Math.min(width, height) / 2) - 5;
+        const formatNumber = d3.format(',d');
+        const x = d3.scaleLinear()
+            .range([0, 2 * Math.PI])
+            .clamp(true);
+        const y = d3.scaleSqrt()
+            .range([maxRadius*.1, maxRadius]);
+        const color = d3.scaleOrdinal(d3.schemeCategory20);
+        const partition = d3.partition();
+        const arc = d3.arc()
+            .startAngle(d => x(d.x0))
+            .endAngle(d => x(d.x1))
+            .innerRadius(d => Math.max(0, y(d.y0)))
+            .outerRadius(d => Math.max(0, y(d.y1)));
+        const middleArcLine = d => {
+            const halfPi = Math.PI/2;
+            const angles = [x(d.x0) - halfPi, x(d.x1) - halfPi];
+            const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
+            const middleAngle = (angles[1] + angles[0]) / 2;
+            const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+            if (invertDirection) { angles.reverse(); }
+            const path = d3.path();
+            path.arc(0, 0, r, angles[0], angles[1], invertDirection);
+            return path.toString();
+        };
+        const textFits = d => {
+            const CHAR_SPACE = 6;
+            const deltaAngle = x(d.x1) - x(d.x0);
+            const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
+            const perimeter = r * deltaAngle;
+            return d.data.name.length * CHAR_SPACE < perimeter;
+        };
+        const svg = d3.select('body').append('svg')
+            .style('width', '50vw')
+            .style('height', '100vh')
+            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
+            .on('click', () => focusOn()); // Reset zoom on canvas click
+			
+		//$svg.css({top: 200, left: 200, position:'absolute'});
+			
+        d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
+            if (error) throw error;
+            root = d3.hierarchy(root);
+            root.sum(d => d.size);
+            const slice = svg.selectAll('g.slice')
+                .data(partition(root).descendants());
+            slice.exit().remove();
+            const newSlice = slice.enter()
+                .append('g').attr('class', 'slice')
+                .on('click', d => {
+                    d3.event.stopPropagation();
+                    focusOn(d);
+                    createDiv(d);
+                });
+            newSlice.append('title')
+                .text(d => d.data.name + '\n' + formatNumber(d.value));
+            newSlice.append('path')
+                .attr('class', 'main-arc')
+                .style('fill', d => color((d.children ? d : d.parent).data.name))
+                .attr('d', arc);
+            newSlice.append('path')
+                .attr('class', 'hidden-arc')
+                .attr('id', (_, i) => `hiddenArc${i}`)
+                .attr('d', middleArcLine);
+            const text = newSlice.append('text')
+                .attr('display', d => textFits(d) ? null : 'none');
+            // Add white contour
+            text.append('textPath')
+                .attr('startOffset','50%')
+                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
+                .text(d => d.data.name)
+                .style('fill', 'none')
+                .style('stroke', '#fff')
+                .style('stroke-width', 5)
+                .style('stroke-linejoin', 'round');
+            text.append('textPath')
+                .attr('startOffset','50%')
+                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
+                .text(d => d.data.name);
+        });
+        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+            // Reset to top-level if no data point specified
+            const transition = svg.transition()
+                .duration(750)
+                .tween('scale', () => {
+                    const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+                        yd = d3.interpolate(y.domain(), [d.y0, 1]);
+                    return t => { x.domain(xd(t)); y.domain(yd(t)); };
+                });
+            
+            transition.selectAll('path.main-arc')
+                .attrTween('d', d => () => arc(d));
+            transition.selectAll('path.hidden-arc')
+                .attrTween('d', d => () => middleArcLine(d));
+            transition.selectAll('text')
+                .attrTween('display', d => () => textFits(d) ? null : 'none');
+            moveStackToFront(d);
+            //
+            function moveStackToFront(elD) {
+                svg.selectAll('.slice').filter(d => d === elD)
+                    .each(function(d) {
+                        this.parentNode.appendChild(this);
+                        if (d.parent) { moveStackToFront(d.parent); }
+                    })
+            }
+        }
+	    
+		function error_fn(error){
+		
+			alert(error);
+		}
+		
+		function createDiv(d){
+		
+		var data_name = d.data.name;
+		console.log(data_name);
+		
+		$.ajax({
+			url: 'https://poojakabber.github.io/flare_heather_questions.json',
+			type: 'GET',
+			data_name_ajax: data_name,
+			dataType: "json",
+			success: function(json_data)
+			{
+				console.log("Inside success")
+				var div_elem_exists = document.getElementById("question_div");
+				if (div_elem_exists)
+				{
+					div_elem_exists.remove();
+				}
+			
+				var div_elem = document.createElement("div");
+				div_elem.setAttribute("id", "question_div");
+				div_elem.style.width = "40vw";
+				div_elem.style.height = "80vh";
+				div_elem.style.fontSize = "15px";
+				div_elem.style.float = "right";
+				div_elem.style.position = "relative";
+				div_elem.style.right = "10px";
+				data_array = json_data.children;
+				
+				//console.log(data_array)
+				
+				for(var j = 0; j < data_array.length; j++){
+					console.log("Inside first loop of data array");
+					console.log(data_array[j].name, this.data_name_ajax);
+					if (data_array[j].name == this.data_name_ajax){
+							console.log("If they match")
+							var x = '';
+							for (var k = 0; k < data_array[j].questions.length; k++)
+							{
+								x = x + "<br><br>" + data_array[j].questions[k];
+							}
+							console.log("x: ", x)
+							// var x = data_array[j].questions;
+							div_elem.innerHTML = x;
+							document.body.appendChild(div_elem);
+						
+					};
+				
+				};
+			},
+			error: error_fn
+		});
+		
+		}
+		
+    </script>
+</body>
