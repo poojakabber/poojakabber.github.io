@@ -21,6 +21,26 @@
       text.axis-worktime {
         fill: #000;
       }
+      
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+      #table{
+          position: absolute;
+          left: 70%;
+      }
     </style>
     <script src="https://d3js.org/d3.v3.js"></script>
   </head>
@@ -28,7 +48,7 @@
     <div id="chart"></div>
     <div id="dataset-picker">
     </div>
-    <div>
+    <div id = "table">
       <table>
         <tr>
           <th>Id</th>
