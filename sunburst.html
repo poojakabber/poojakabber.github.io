@@ -82,7 +82,7 @@
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
-        d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
+        d3.json('https://poojakabber.github.io/flare_heather_temp.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
