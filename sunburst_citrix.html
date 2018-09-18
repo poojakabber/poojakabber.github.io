@@ -100,7 +100,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d, svg);
-                    createDiv(d);
+                    //createDiv(d);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
@@ -141,7 +141,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d, svg2);
-                    createDiv(d);
+                    //createDiv(d);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
