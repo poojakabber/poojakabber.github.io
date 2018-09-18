@@ -125,6 +125,7 @@
         });
         function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
             // Reset to top-level if no data point specified
+		console.log("Inside focusOn");
             var transition = svg.transition()
                 .duration(750)
                 .tween('scale', () => {
