@@ -81,7 +81,7 @@ d3.csv("https://poojakabber.github.io/analyst_activity.csv", function(error, dat
       .style("fill", function(d) { return color(d.data.name); });
 
   svg.append("text")
-      .attr("dy", ".35em")
+      .attr("dy", "20px")
       .style("text-anchor", "middle")
       .text(function(d) { return d.State; });
 
