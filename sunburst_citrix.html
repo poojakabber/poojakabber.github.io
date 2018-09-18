@@ -83,7 +83,7 @@
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
-        d3.json('https://poojakabber.github.io/flare_heather_citrix.json', (error, root) => {
+        d3.json(filename, (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
@@ -210,7 +210,7 @@
 		
 		}
 	};
-draw_sunburst();
-draw_sunburst();
+draw_sunburst('https://poojakabber.github.io/flare_heather_citrix.json');
+draw_sunburst('https://poojakabber.github.io/flare_heather.json');
 	</script>
 </body>
