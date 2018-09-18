@@ -107,7 +107,8 @@
                 .attr('id', (_, i) => `hiddenArc${i}`)
                 .attr('d', middleArcLine);
             const text = newSlice.append('text')
-                .attr('display', d => textFits(d) ? null : 'none');
+                .attr('display', d => textFits(d) ? null : 'none')
+	    	.attr('transform', 'rotate(20deg)');
             // Add white contour
             text.append('textPath')
                 .attr('startOffset','50%')
