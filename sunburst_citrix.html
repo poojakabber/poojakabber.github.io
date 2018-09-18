@@ -40,6 +40,16 @@
 <body>
 
     <script>
+	
+	var charts = [];
+
+    d3.json("flare.json", function(error, root) {
+
+      charts.push(makeSunburst(_.cloneDeep(root)));
+      charts.push(makeSunburst(_.cloneDeep(root)));
+
+      function makeSunburst(root) {
+
         var width = window.innerWidth,
             height = window.innerHeight,
             maxRadius = (Math.min(width, height) / 2) - 5;
@@ -79,17 +89,8 @@
             .style('height', '100vh')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
-			
-	var svg2 = d3.select('body').append('svg')
-            .style('width', '50%')
-            .style('height', '100vh')
-            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
-            .on('click', () => focusOn2());
-			
-		//$svg.css({top: 200, left: 200, position:'absolute'});
-			
-        d3.json("https://poojakabber.github.io/flare_heather.json", (error, root) => {
-            if (error) throw error;
+        
+		if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
             var slice = svg.selectAll('g.slice')
@@ -127,50 +128,9 @@
                 .attr('startOffset','50%')
                 .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
                 .text(d => d.data.name);
-        });
-		
-	d3.json("https://poojakabber.github.io/flare_heather_citrix.json", (error, root) => {
-            if (error) throw error;
-            root = d3.hierarchy(root);
-            root.sum(d => d.size);
-            var slice = svg2.selectAll('g.slice')
-                .data(partition(root).descendants());
-            slice.exit().remove();
-            var newSlice = slice.enter()
-                .append('g').attr('class', 'slice')
-                .on('click', d => {
-                    d3.event.stopPropagation();
-                    focusOn2(d);
-                    //createDiv(d);
-                });
-            newSlice.append('title')
-                .text(d => d.data.name + '\n' + formatNumber(d.value));
-            newSlice.append('path')
-                .attr('class', 'main-arc')
-                .style('fill', d => color((d.children ? d : d.parent).data.name))
-                .attr('d', arc);
-            newSlice.append('path')
-                .attr('class', 'hidden-arc')
-                .attr('id', (_, i) => `hiddenArc${i}`)
-                .attr('d', middleArcLine);
-            var text = newSlice.append('text')
-                .attr('display', d => textFits(d) ? null : 'none');
-            // Add white contour
-            text.append('textPath')
-                .attr('startOffset','50%')
-                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
-                .text(d => d.data.name)
-                .style('fill', 'none')
-                .style('stroke', '#fff')
-                .style('stroke-width', 5)
-                .style('stroke-linejoin', 'round');
-            text.append('textPath')
-                .attr('startOffset','50%')
-                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
-                .text(d => d.data.name);
-        });
-		
-        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+      }
+
+	   function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
             // Reset to top-level if no data point specified
 		console.log("Inside focusOn");
             var transition = svg.transition()
@@ -197,92 +157,12 @@
                     })
             }
         }
-	    
-	function focusOn2(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
-            // Reset to top-level if no data point specified
-		console.log("Inside focusOn2");
-            var transition = svg2.transition()
-                .duration(750)
-                .tween('scale', () => {
-                    var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
-                        yd = d3.interpolate(y.domain(), [d.y0, 1]);
-                    return t => { x.domain(xd(t)); y.domain(yd(t)); };
-                });
-            
-            transition.selectAll('path.main-arc')
-                .attrTween('d', d => () => arc(d));
-            transition.selectAll('path.hidden-arc')
-                .attrTween('d', d => () => middleArcLine(d));
-            transition.selectAll('text')
-                .attrTween('display', d => () => textFits(d) ? null : 'none');
-            moveStackToFront(d);
-            //
-            function moveStackToFront(elD) {
-                svg2.selectAll('.slice').filter(d => d === elD)
-                    .each(function(d) {
-                        this.parentNode.appendChild(this);
-                        if (d.parent) { moveStackToFront(d.parent); }
-                    })
-            }
-        }
-	    
-		function error_fn(error){
-		
-			alert(error);
-		}
-		
-		/*function createDiv(d){
-		
-		var data_name = d.data.name;
-		//console.log(data_name);
-		
-		$.ajax({
-			url: 'https://poojakabber.github.io/flare_heather_questions_citrix.json',
-			type: 'GET',
-			data_name_ajax: data_name,
-			dataType: "json",
-			success: function(json_data)
-			{
-				var div_elem_exists = document.getElementById("question_div");
-				if (div_elem_exists)
-				{
-					div_elem_exists.remove();
-				}
-			
-				var div_elem = document.createElement("div");
-				div_elem.setAttribute("id", "question_div");
-				div_elem.style.width = "40vw";
-				div_elem.style.height = "80vh";
-				div_elem.style.fontSize = "15px";
-				div_elem.style.float = "right";
-				div_elem.style.position = "relative";
-				div_elem.style.right = "10px";
-				data_array = json_data.children;
-				
-				//console.log(data_array)
-				
-				for(var j = 0; j < data_array.length; j++){
-					//console.log("Inside first loop of data array");
-					//console.log(data_array[j].name, this.data_name_ajax);
-					if (data_array[j].name == this.data_name_ajax){
-							//console.log("If they match")
-							var x = '';
-							for (var k = 0; k < data_array[j].questions.length; k++)
-							{
-								x = x + "<br><br>" + data_array[j].questions[k];
-							}
-							//console.log("x: ", x)
-							// var x = data_array[j].questions;
-							div_elem.innerHTML = x;
-							document.body.appendChild(div_elem);
-						
-					};
-				
-				};
-			},
-			error: error_fn
-		});
-		
-		};*/
+	  
+	  return svg;
+	  
+      d3.select(self.frameElement).style("height", "600px");
+	  
+    });
+	
 	</script>
 </body>
