@@ -78,13 +78,13 @@
             .style('width', '50%')
             .style('height', '100vh')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
-            .on('click', () => focusOn(svg)); // Reset zoom on canvas click
+            .on('click', () => focusOn()); // Reset zoom on canvas click
 			
-		var svg2 = d3.select('body').append('svg')
+	var svg2 = d3.select('body').append('svg')
             .style('width', '50%')
             .style('height', '100vh')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
-            .on('click', () => focusOn(svg2));
+            .on('click', () => focusOn2());
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
@@ -99,7 +99,7 @@
                 .append('g').attr('class', 'slice')
                 .on('click', d => {
                     d3.event.stopPropagation();
-                    focusOn(d, svg);
+                    focusOn(d);
                     //createDiv(d);
                 });
             newSlice.append('title')
@@ -129,7 +129,7 @@
                 .text(d => d.data.name);
         });
 		
-		d3.json("https://poojakabber.github.io/flare_heather_citrix.json", (error, root) => {
+	d3.json("https://poojakabber.github.io/flare_heather_citrix.json", (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
@@ -140,7 +140,7 @@
                 .append('g').attr('class', 'slice')
                 .on('click', d => {
                     d3.event.stopPropagation();
-                    focusOn(d, svg2);
+                    focusOn2(d);
                     //createDiv(d);
                 });
             newSlice.append('title')
@@ -170,10 +170,10 @@
                 .text(d => d.data.name);
         });
 		
-        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }, s) {
+        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
             // Reset to top-level if no data point specified
 		console.log("Inside focusOn");
-            var transition = s.transition()
+            var transition = svg.transition()
                 .duration(750)
                 .tween('scale', () => {
                     var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
@@ -187,13 +187,41 @@
                 .attrTween('d', d => () => middleArcLine(d));
             transition.selectAll('text')
                 .attrTween('display', d => () => textFits(d) ? null : 'none');
-            moveStackToFront(d, s);
+            moveStackToFront(d);
             //
-            function moveStackToFront(elD, s) {
-                s.selectAll('.slice').filter(d => d === elD)
+            function moveStackToFront(elD) {
+                svg.selectAll('.slice').filter(d => d === elD)
                     .each(function(d) {
                         this.parentNode.appendChild(this);
-                        if (d.parent) { moveStackToFront(d.parent, s); }
+                        if (d.parent) { moveStackToFront(d.parent); }
+                    })
+            }
+        }
+	    
+	function focusOn2(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+            // Reset to top-level if no data point specified
+		console.log("Inside focusOn2");
+            var transition = svg2.transition()
+                .duration(750)
+                .tween('scale', () => {
+                    var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+                        yd = d3.interpolate(y.domain(), [d.y0, 1]);
+                    return t => { x.domain(xd(t)); y.domain(yd(t)); };
+                });
+            
+            transition.selectAll('path.main-arc')
+                .attrTween('d', d => () => arc(d));
+            transition.selectAll('path.hidden-arc')
+                .attrTween('d', d => () => middleArcLine(d));
+            transition.selectAll('text')
+                .attrTween('display', d => () => textFits(d) ? null : 'none');
+            moveStackToFront(d);
+            //
+            function moveStackToFront(elD) {
+                svg2.selectAll('.slice').filter(d => d === elD)
+                    .each(function(d) {
+                        this.parentNode.appendChild(this);
+                        if (d.parent) { moveStackToFront(d.parent); }
                     })
             }
         }
