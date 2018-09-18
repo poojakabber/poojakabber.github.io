@@ -40,7 +40,6 @@
 <body>
 
     <script>
-	function draw_sunburst(filename){
         var width = window.innerWidth,
             height = window.innerHeight,
             maxRadius = (Math.min(width, height) / 2) - 5;
@@ -79,11 +78,17 @@
             .style('width', '50%')
             .style('height', '100vh')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
-            .on('click', () => focusOn()); // Reset zoom on canvas click
+            .on('click', () => focusOn(svg)); // Reset zoom on canvas click
+			
+		var svg2 = d3.select('body').append('svg')
+            .style('width', '50%')
+            .style('height', '100vh')
+            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
+            .on('click', () => focusOn(svg2));
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
-        d3.json(filename, (error, root) => {
+        d3.json("https://poojakabber.github.io/flare_heather.json", (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
@@ -94,7 +99,7 @@
                 .append('g').attr('class', 'slice')
                 .on('click', d => {
                     d3.event.stopPropagation();
-                    focusOn(d);
+                    focusOn(d, svg);
                     createDiv(d);
                 });
             newSlice.append('title')
@@ -123,10 +128,52 @@
                 .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
                 .text(d => d.data.name);
         });
-        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+		
+		d3.json("https://poojakabber.github.io/flare_heather_citrix.json", (error, root) => {
+            if (error) throw error;
+            root = d3.hierarchy(root);
+            root.sum(d => d.size);
+            var slice = svg2.selectAll('g.slice')
+                .data(partition(root).descendants());
+            slice.exit().remove();
+            var newSlice = slice.enter()
+                .append('g').attr('class', 'slice')
+                .on('click', d => {
+                    d3.event.stopPropagation();
+                    focusOn(d, svg2);
+                    createDiv(d);
+                });
+            newSlice.append('title')
+                .text(d => d.data.name + '\n' + formatNumber(d.value));
+            newSlice.append('path')
+                .attr('class', 'main-arc')
+                .style('fill', d => color((d.children ? d : d.parent).data.name))
+                .attr('d', arc);
+            newSlice.append('path')
+                .attr('class', 'hidden-arc')
+                .attr('id', (_, i) => `hiddenArc${i}`)
+                .attr('d', middleArcLine);
+            var text = newSlice.append('text')
+                .attr('display', d => textFits(d) ? null : 'none');
+            // Add white contour
+            text.append('textPath')
+                .attr('startOffset','50%')
+                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
+                .text(d => d.data.name)
+                .style('fill', 'none')
+                .style('stroke', '#fff')
+                .style('stroke-width', 5)
+                .style('stroke-linejoin', 'round');
+            text.append('textPath')
+                .attr('startOffset','50%')
+                .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
+                .text(d => d.data.name);
+        });
+		
+        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }, s) {
             // Reset to top-level if no data point specified
 		console.log("Inside focusOn");
-            var transition = svg.transition()
+            var transition = s.transition()
                 .duration(750)
                 .tween('scale', () => {
                     var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
@@ -140,13 +187,13 @@
                 .attrTween('d', d => () => middleArcLine(d));
             transition.selectAll('text')
                 .attrTween('display', d => () => textFits(d) ? null : 'none');
-            moveStackToFront(d);
+            moveStackToFront(d, s);
             //
-            function moveStackToFront(elD) {
-                svg.selectAll('.slice').filter(d => d === elD)
+            function moveStackToFront(elD, s) {
+                s.selectAll('.slice').filter(d => d === elD)
                     .each(function(d) {
                         this.parentNode.appendChild(this);
-                        if (d.parent) { moveStackToFront(d.parent); }
+                        if (d.parent) { moveStackToFront(d.parent, s); }
                     })
             }
         }
@@ -156,7 +203,7 @@
 			alert(error);
 		}
 		
-		function createDiv(d){
+		/*function createDiv(d){
 		
 		var data_name = d.data.name;
 		//console.log(data_name);
@@ -208,9 +255,6 @@
 			error: error_fn
 		});
 		
-		}
-	};
-draw_sunburst('https://poojakabber.github.io/flare_heather_citrix.json');
-draw_sunburst('https://poojakabber.github.io/flare_heather_citrix.json');
+		};*/
 	</script>
 </body>
