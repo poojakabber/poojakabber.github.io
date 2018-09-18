@@ -36,7 +36,7 @@ var pie = d3.layout.pie()
 d3.csv("https://poojakabber.github.io/analyst_activity.csv", function(error, data) {
   if (error) throw error;
 
-  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "State"; }));
+  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "Company"; }));
 
   data.forEach(function(d) {
     d.ages = color.domain().map(function(name) {
