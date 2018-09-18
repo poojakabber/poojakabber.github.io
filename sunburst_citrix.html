@@ -40,7 +40,7 @@
 <body>
 
     <script>
-	function draw_sunburst(){
+	function draw_sunburst(divide_by_width_num, width_vh){
         const width = window.innerWidth,
             height = window.innerHeight,
             maxRadius = (Math.min(width, height) / 2) - 5;
@@ -76,9 +76,9 @@
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
         const svg = d3.select('body').append('svg')
-            .style('width', '50vw')
+            .style('width', width_vh)
             .style('height', '100vh')
-            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
+            .attr('viewBox', `${-width / divide_by_width_num} ${-height / 2} ${width/2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
@@ -210,6 +210,7 @@
 		
 		}
 	};
-draw_sunburst();
+draw_sunburst(4, '50vh');
+draw_sunburst(1, '100vh');
 	</script>
 </body>
