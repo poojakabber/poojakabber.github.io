@@ -75,7 +75,7 @@
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
         const svg = d3.select('body').append('svg')
-            .style('width', '100%')
+            .style('width', '50%')
             .style('height', '100%')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
@@ -94,7 +94,7 @@
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d);
-                    //createDiv(d);
+                    createDiv(d);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
@@ -160,7 +160,7 @@
 		console.log(data_name);
 		
 		$.ajax({
-			url: 'https://poojakabber.github.io/flare_heather_questions_temp.json',
+			url: 'https://poojakabber.github.io/flare_heather_questions.json',
 			type: 'GET',
 			data_name_ajax: data_name,
 			dataType: "json",
