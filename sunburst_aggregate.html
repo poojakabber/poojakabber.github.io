@@ -85,7 +85,7 @@
         d3.json('https://poojakabber.github.io/flare_heather_aggregate.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
-            root.sum(d => d.size);
+            root.sum(d => 2);
             const slice = svg.selectAll('g.slice')
                 .data(partition(root).descendants());
             slice.exit().remove();
