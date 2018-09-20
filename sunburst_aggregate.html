@@ -51,7 +51,7 @@
             .range([maxRadius*.1, maxRadius]);
         const color = d3.scaleOrdinal(d3.schemeCategory20);
         const partition = d3.partition();
-	var rscale = d3.scale.linear().domain([0,0.8,1.0]).range([0,0.98,1.0]);
+	var rscale = d3.scaleLinear().domain([0,0.8,1.0]).range([0,0.98,1.0]);
         const arc = d3.arc()
             .startAngle(d => x(d.x0))
             .endAngle(d => x(d.x1))
