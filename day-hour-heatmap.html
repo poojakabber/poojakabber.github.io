@@ -149,7 +149,7 @@
           .enter().append("text")
             .text(function (d) { return d; })
             .attr("x", -50)
-            .attr("y", function (d, i) { return (i * gridSize) + 50; })
+            .attr("y", function (d, i) { return (i * gridSize) - 30; })
             .style("text-anchor", "end")
             .attr("transform", "translate(-1," + gridSize / 4 + ")")
             .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
@@ -159,7 +159,7 @@
           .enter().append("text")
             .text(function(d) { return d; })
             .attr("x", function(d, i) { return (i * gridSize) - 30; })
-            .attr("y", 0)
+            .attr("y", -50)
             .style("text-anchor", "middle")
             .attr("transform", "translate(" + gridSize / 4 + ", -1)")
             //.attr("transform", "rotate(20deg)")
@@ -209,7 +209,7 @@
 
           legend.append("rect")
             .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
-            .attr("y", -50)
+            .attr("y", 0)
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
             .style("fill", function(d, i) { return colors[i]; });
@@ -218,7 +218,7 @@
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
             .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
-            .attr("y", -50 + gridSize);
+            .attr("y", 0 + gridSize);
 
           legend.exit().remove();
 
