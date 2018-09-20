@@ -47,8 +47,10 @@
     <script src="https://d3js.org/d3.v3.js"></script>
   </head>
   <body>
-    <div class="page-header">
-      <h1>Example Page Header</h1>      
+    <div class="container" >
+      <div class="page-header">
+        <h3>Example Page Header</h1>      
+      </div>
     </div>
     <div id="chart"></div>
     <div id="dataset-picker">
@@ -147,7 +149,7 @@
           .enter().append("text")
             .text(function (d) { return d; })
             .attr("x", -50)
-            .attr("y", function (d, i) { return (i * gridSize) - 30; })
+            .attr("y", function (d, i) { return (i * gridSize); })
             .style("text-anchor", "end")
             .attr("transform", "translate(-1," + gridSize / 4 + ")")
             .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
