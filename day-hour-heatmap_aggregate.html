@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+    <style>
+      rect.bordered {
+        stroke: #E6E6E6;
+        stroke-width:2px;   
+      }
+      text.mono {
+        font-size: 9pt;
+        font-family: Consolas, courier;
+        fill: #aaa;
+      }
+      text.axis-workweek {
+        fill: #000;
+      }
+      text.axis-worktime {
+        fill: #000;
+      }
+      
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+      #table{
+          position: absolute;
+          left: 70%;
+          top: 20%;
+      }
+    </style>
+    <script src="https://d3js.org/d3.v3.js"></script>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <div id="dataset-picker">
+    </div>
+    <div id = "table">
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Phrase</th>
+        </tr>
+        <tr>
+          <td>p1</td>
+          <td>growth rate</td>
+        </tr>
+        <tr>
+          <td>p2</td>
+          <td>gross margin</td>
+        </tr>
+        <tr>
+          <td>p3</td>
+          <td>cash flow</td>
+        </tr>
+        <tr>
+          <td>p4</td>
+          <td>operating margin</td>
+        </tr>
+        <tr>
+          <td>p5</td>
+          <td>revenue growth</td>
+        </tr>
+        <tr>
+          <td>p6</td>
+          <td>red hat</td>
+        </tr>
+        <tr>
+          <td>p7</td>
+          <td>billing growth</td>
+        </tr>
+        <tr>
+          <td>p8</td>
+          <td>public cloud</td>
+        </tr>
+        <tr>
+          <td>p9</td>
+          <td>renewal rate</td>
+        </tr>
+        <tr>
+          <td>p10</td>
+          <td>existing customer</td>
+        </tr>
+        <tr>
+          <td>p11</td>
+          <td>competitive environment</td>
+        </tr>
+        <tr>
+          <td>p12</td>
+          <td>sale force</td>
+        </tr>
+        <tr>
+          <td>p13</td>
+          <td>deferred revenue</td>
+        </tr>
+        <tr>
+          <td>p14</td>
+          <td>license growth</td>
+        </tr>
+        <tr>
+          <td>p15</td>
+          <td>run rate</td>
+        </tr>
+         <tr>
+          <td>p16</td>
+          <td>cloud business</td>
+        </tr>
+         <tr>
+          <td>p17</td>
+          <td>constant currency</td>
+        </tr>
+         <tr>
+          <td>p18</td>
+          <td>sales force</td>
+        </tr>
+         <tr>
+          <td>p19</td>
+          <td>service desk</td>
+        </tr>
+         <tr>
+          <td>p20</td>
+          <td>service provider</td>
+        </tr>
+        
+      </table>
+      
+    </div>
+    <script type="text/javascript">
+      var margin = { top: 100, right: 0, bottom: 100, left: 250 },
+          width = 1500 - margin.left - margin.right,
+          height = 1030 - margin.top - margin.bottom,
+          gridSize = Math.floor(width / 30),
+          legendElementWidth = gridSize,
+          buckets = 5,
+          colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
+          days = ['Heather Bellini', 'Brent Thill', 'Raimo Lenschow', 'Walter Pritchard', 'Kash Rangan', 'John DiFucci', 'Michael Turits', 'Karl Keirstead', 'Ed Maguire', 'Steve Ashley', 'Gregg Moskowitz', 'Mark Moerdler', 'Phil Winslow', 'Kirk Materne', 'Bhavan Suri', 'Abhey Lamba', 'Brad Reback', 'Ross MacMillan', 'Brian White', 'Rick Sherlund'],
+//           times = ['gross margin', 'commercial cloud', 'commercial licensing', 'growth rate', 'cloud business', 'cash flow', 'office 365', 'server product', 'constant currency', 'pc market', 'margin profile', 'licensing business', 'transactional business', 'market share', 'pc unit'];
+          times = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20']
+          datasets = ["https://poojakabber.github.io/data1.tsv", "data2.tsv"];
+      var svg = d3.select("#chart").append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      var dayLabels = svg.selectAll(".dayLabel")
+          .data(days)
+          .enter().append("text")
+            .text(function (d) { return d; })
+            .attr("x", -50)
+            .attr("y", function (d, i) { return (i * gridSize) - 30; })
+            .style("text-anchor", "end")
+            .attr("transform", "translate(-1," + gridSize / 4 + ")")
+            .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+      var timeLabels = svg.selectAll(".timeLabel")
+          .data(times)
+          .enter().append("text")
+            .text(function(d) { return d; })
+            .attr("x", function(d, i) { return (i * gridSize) - 30; })
+            .attr("y", -50)
+            .style("text-anchor", "middle")
+            .attr("transform", "translate(" + gridSize / 4 + ", -1)")
+            //.attr("transform", "rotate(20deg)")
+            .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+      var heatmapChart = function(tsvFile) {
+        d3.tsv(tsvFile,
+        function(d) {
+          return {
+            day: +d.day,
+            hour: +d.hour,
+            value: +d.value
+          };
+        },
+        function(error, data) {
+          var colorScale = d3.scale.quantile()
+              .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+              .range(colors);
+          var cards = svg.selectAll(".hour")
+              .data(data, function(d) {return d.day+':'+d.hour;});
+          cards.append("title");
+          cards.enter().append("rect")
+              .attr("x", function(d) { return (d.hour - 1) * gridSize; })
+              .attr("y", function(d) { return (d.day - 1) * gridSize; })
+              .attr("rx", 4)
+              .attr("ry", 4)
+              .attr("class", "hour bordered")
+              .attr("width", gridSize)
+              .attr("height", gridSize)
+              .style("fill", colors[0]);
+          cards.transition().duration(1000)
+              .style("fill", function(d) { return colorScale(d.value); });
+          cards.select("title").text(function(d) { return d.value; });
+          
+          cards.exit().remove();
+          var legend = svg.selectAll(".legend")
+              .data([0].concat(colorScale.quantiles()), function(d) { return d; });
+          legend.enter().append("g")
+              .attr("class", "legend");
+          legend.append("rect")
+            .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
+            .attr("y", -50)
+            .attr("width", legendElementWidth)
+            .attr("height", gridSize / 2)
+            .style("fill", function(d, i) { return colors[i]; });
+          legend.append("text")
+            .attr("class", "mono")
+            .text(function(d) { return "≥ " + Math.round(d); })
+            .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
+            .attr("y", -50 + gridSize);
+          legend.exit().remove();
+        });  
+      };
+      heatmapChart(datasets[0]);
+      
+      var datasetpicker = d3.select("#dataset-picker").selectAll(".dataset-button")
+        .data(datasets);
+      datasetpicker.enter()
+        .append("input")
+        .attr("value", function(d){ return "Dataset " + d })
+        .attr("type", "button")
+        .attr("class", "dataset-button")
+        .on("click", function(d) {
+          heatmapChart(d);
+        });
+    </script>
+  </body>
+</html>
