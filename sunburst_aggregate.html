@@ -51,11 +51,12 @@
             .range([maxRadius*.1, maxRadius]);
         const color = d3.scaleOrdinal(d3.schemeCategory20);
         const partition = d3.partition();
+	var rscale = d3.scale.linear().domain([0,0.8,1.0]).range([0,0.98,1.0]);
         const arc = d3.arc()
             .startAngle(d => x(d.x0))
             .endAngle(d => x(d.x1))
-            .innerRadius(d => Math.max(0, y(d.y0)))
-            .outerRadius(d => Math.max(0, y(d.y1)));
+            .innerRadius(d => Math.max(0, y(d.y0) * rscale(d.y0/100)))
+            .outerRadius(d => Math.max(0, y(d.y1) * rscale((d.y1)/100)));
         const middleArcLine = d => {
             const halfPi = Math.PI/2;
             const angles = [x(d.x0) - halfPi, x(d.x1) - halfPi];
@@ -85,7 +86,7 @@
         d3.json('https://poojakabber.github.io/flare_heather_aggregate.json', (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
-            root.sum(d => 2);
+            root.sum(d => d.size);
             const slice = svg.selectAll('g.slice')
                 .data(partition(root).descendants());
             slice.exit().remove();
