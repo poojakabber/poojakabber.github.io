@@ -47,10 +47,8 @@
     <script src="https://d3js.org/d3.v3.js"></script>
   </head>
   <body>
-    <div class="container" >
-      <div class="page-header">
-        <h3>Example Page Header</h1>      
-      </div>
+    <div class="container">
+        <h3>Microsoft</h3>      
     </div>
     <div id="chart"></div>
     <div id="dataset-picker">
@@ -209,7 +207,7 @@
 
           legend.append("rect")
             .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
-            .attr("y", -125)
+            .attr("y", -50)
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
             .style("fill", function(d, i) { return colors[i]; });
@@ -218,7 +216,7 @@
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
             .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
-            .attr("y", -125 + gridSize);
+            .attr("y", -50 + gridSize);
 
           legend.exit().remove();
 
