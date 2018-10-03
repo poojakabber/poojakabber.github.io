@@ -158,7 +158,7 @@ $(document).ready(function () {
 							console.log("x: ", x)
 							// var x = data_array[j].questions;
 							div_elem.innerHTML = x;
-							var section_elem = getElementByName("section");
+							var section_elem = document.getElementById("right-content");
 							section_elem.appendChild(div_elem);
 						
 					};
