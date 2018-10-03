@@ -1,1 +1,311 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Index</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+	<script src='https://d3js.org/d3.v4.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+        body {
+            font-family: Sans-serif;
+            font-size: 11px;
+        }
+        .slice {
+            cursor: pointer;
+        }
+        .slice .main-arc {
+            stroke: #fff;
+            stroke-width: 1px;
+        }
+        .slice .hidden-arc {
+            fill: none;
+        }
+        .slice text {
+            pointer-events: none;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+		
+		.question_div{
+			font-family: Sans-serif;
+			font-size:15px;
+		}
+		
+		div{
+			width: 1000;
+			height: 600;
+			position: absolute;
+		}
+		
+	    h1{
+		    padding-left: 750px;
+	    }
+    </style>
+</head>
+
+<body>
+    <div class="main-container left-panel-open">
+        <div class="navbar">
+            <header class="pull-left header col-xs-12">
+                <div class="content_header col-xs-2 pull-left">
+                    <a href="" class="logo">&nbsp;</a>
+                </div>
+                <div class="col-xs-10 pull-right text-right">
+                    <div class="pull-right nav-top-right">
+                        <a href="" class="pull-left help">Help</a>
+                        <a href="">Logout</a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="content-wrapper">
+            <aside>
+                <div class="left-panel">
+                    <span class="toggle-left-panel"><i class="icon" data-icon=">"></i></span>
+                    <header class="side-panel-header">
+                        <h3>Transcripts</h3><span class="filter-record-count">
+                            <span>
+                                16
+                            </span>
+                        </span>
+                    </header>
+                    <div class="filter-section">
+                        <h3 class="showdata-for">Show Data For</h3>
+                        <div class="filter-panel">
+                            <input type="checkbox" id="comp" name="MSFT" class="chk" />
+                            <label for="comp">My company</label>
+                        </div>
+                        <div class="filter-panel">
+                            <input type="checkbox" id="peer-chk" name="MSFT" class="chk" />
+                            <label for="peer-chk"><span class="peer-badge">P</span>Peers</label>
+                        </div>
+                        <div class="filter-panel">
+                            <input type="checkbox" id="other-comp" name="MSFT" class="chk" />
+                            <label for="other-comp">Other companies</label>
+                        </div>
+                        <div class="filter-panel">
+                            <input type="checkbox" id="sel-tickr" name="MSFT" class="chk" />
+                            <label for="sel-tickr">Show only reports with selected ticker as primary</label>
+                        </div>
+
+                        <div class="filter-panel search-keyword">
+                            <label class="fw-bold">Date Range</label>
+                            <div class="dropdown col-xs-12">
+                                <button class="btn btn-default dropdown-toggle col-xs-12" type="button" id="menu1" data-toggle="dropdown">Tutorials
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="filter-panel search-keyword search-analysts">
+                            <h3 class="fw-bold">Analysts</h3>
+                            <div class="filter-controls">
+                                    <ul class="filter-items-list">
+                                    <li>
+                                    <input type="radio" class="radio" checked="checked" id="single_measure" name="measure"><label for="single_measure">Single Measure</label>
+                                    </li>
+                                    <li>
+                                    <input type="radio" class="radio" id="multiple_measure" name="measure"><label for="multiple_measure">Multiple Measure</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <section class="right-content">
+                
+				<h1>Microsoft</h1>
+	
+				<script>
+					const width = 1500,
+						height = 920,
+						maxRadius = (Math.min(width, height) / 2) - 5;
+					const formatNumber = d3.format(',d');
+					const x = d3.scaleLinear()
+						.range([0, 2 * Math.PI])
+						.clamp(true);
+					const y = d3.scaleSqrt()
+						.range([maxRadius*.1, maxRadius]);
+					const color = d3.scaleOrdinal(d3.schemeCategory20);
+					const partition = d3.partition();
+					const arc = d3.arc()
+						.startAngle(d => x(d.x0))
+						.endAngle(d => x(d.x1))
+						.innerRadius(d => Math.max(0, y(d.y0)))
+						.outerRadius(d => Math.max(0, y(d.y1)));
+					const middleArcLine = d => {
+						const halfPi = Math.PI/2;
+						const angles = [x(d.x0) - halfPi, x(d.x1) - halfPi];
+						const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
+						const middleAngle = (angles[1] + angles[0]) / 2;
+						const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+						if (invertDirection) { angles.reverse(); }
+						const path = d3.path();
+						path.arc(0, 0, r, angles[0], angles[1], invertDirection);
+						return path.toString();
+					};
+					const textFits = d => {
+						const CHAR_SPACE = 6;
+						const deltaAngle = x(d.x1) - x(d.x0);
+						const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
+						const perimeter = r * deltaAngle;
+						return d.data.name.length * CHAR_SPACE < perimeter;
+					};
+					const svg = d3.select('body').append('svg')
+						.style('width', '50%')
+						.style('height', '100%')
+						.attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
+						.on('click', () => focusOn()); // Reset zoom on canvas click
+						
+					//$svg.css({top: 200, left: 200, position:'absolute'});
+						
+					d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
+						if (error) throw error;
+						root = d3.hierarchy(root);
+						root.sum(d => d.size);
+						const slice = svg.selectAll('g.slice')
+							.data(partition(root).descendants());
+						slice.exit().remove();
+						const newSlice = slice.enter()
+							.append('g').attr('class', 'slice')
+							.on('click', d => {
+								d3.event.stopPropagation();
+								focusOn(d);
+								createDiv(d);
+							});
+						newSlice.append('title')
+							.text(d => d.data.name + '\n' + formatNumber(d.value));
+						newSlice.append('path')
+							.attr('class', 'main-arc')
+							.style('fill', d => color((d.children ? d : d.parent).data.name))
+							.attr('d', arc);
+						newSlice.append('path')
+							.attr('class', 'hidden-arc')
+							.attr('id', (_, i) => `hiddenArc${i}`)
+							.attr('d', middleArcLine);
+						const text = newSlice.append('text')
+							.attr('display', d => textFits(d) ? null : 'none');
+						// Add white contour
+						text.append('textPath')
+							.attr('startOffset','50%')
+							.attr('xlink:href', (_, i) => `#hiddenArc${i}` )
+							.text(d => d.data.name)
+							.style('fill', 'none')
+							.style('stroke', '#fff')
+							.style('stroke-width', 5)
+							.style('stroke-linejoin', 'round');
+						text.append('textPath')
+							.attr('startOffset','50%')
+							.attr('xlink:href', (_, i) => `#hiddenArc${i}` )
+							.text(d => d.data.name);
+					});
+					function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+						// Reset to top-level if no data point specified
+						const transition = svg.transition()
+							.duration(750)
+							.tween('scale', () => {
+								const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+									yd = d3.interpolate(y.domain(), [d.y0, 1]);
+								return t => { x.domain(xd(t)); y.domain(yd(t)); };
+							});
+						
+						transition.selectAll('path.main-arc')
+							.attrTween('d', d => () => arc(d));
+						transition.selectAll('path.hidden-arc')
+							.attrTween('d', d => () => middleArcLine(d));
+						transition.selectAll('text')
+							.attrTween('display', d => () => textFits(d) ? null : 'none');
+						moveStackToFront(d);
+						//
+						function moveStackToFront(elD) {
+							svg.selectAll('.slice').filter(d => d === elD)
+								.each(function(d) {
+									this.parentNode.appendChild(this);
+									if (d.parent) { moveStackToFront(d.parent); }
+								})
+						}
+					}
+					
+					function error_fn(error){
+					
+						alert(error);
+					}
+					
+					function createDiv(d){
+					
+					var data_name = d.data.name;
+					console.log(data_name);
+					
+					$.ajax({
+						url: 'https://poojakabber.github.io/flare_heather_questions.json',
+						type: 'GET',
+						data_name_ajax: data_name,
+						dataType: "json",
+						success: function(json_data)
+						{
+							console.log("Inside success")
+							var div_elem_exists = document.getElementById("question_div");
+							if (div_elem_exists)
+							{
+								div_elem_exists.remove();
+							}
+						
+							var div_elem = document.createElement("div");
+							div_elem.setAttribute("id", "question_div");
+							div_elem.style.width = "40vw";
+							div_elem.style.height = "80vh";
+							div_elem.style.fontSize = "15px";
+							div_elem.style.float = "right";
+							div_elem.style.position = "relative";
+							div_elem.style.right = "10px";
+							data_array = json_data.children;
+							
+							//console.log(data_array)
+							
+							for(var j = 0; j < data_array.length; j++){
+								console.log("Inside first loop of data array");
+								console.log(data_array[j].name, this.data_name_ajax);
+								if (data_array[j].name == this.data_name_ajax){
+										console.log("If they match")
+										var x = '';
+										for (var k = 0; k < data_array[j].questions.length; k++)
+										{
+											x = x + "<br><br>" + data_array[j].questions[k];
+										}
+										console.log("x: ", x)
+										// var x = data_array[j].questions;
+										div_elem.innerHTML = x;
+										document.body.appendChild(div_elem);
+									
+								};
+							
+							};
+						},
+						error: error_fn
+					});
+					
+					}
+					
+				</script>
+				
+            </section>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
