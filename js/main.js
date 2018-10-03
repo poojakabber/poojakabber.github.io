@@ -34,7 +34,7 @@ $(document).ready(function () {
             const perimeter = r * deltaAngle;
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
-        const svg = d3.select('body').append('svg')
+        const svg = d3.select('section').append('svg')
             .style('width', '50%')
             .style('height', '100%')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
