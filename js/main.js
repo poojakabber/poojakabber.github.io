@@ -35,7 +35,7 @@ $(document).ready(function () {
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
         const svg = d3.select('section').append('svg')
-            .style('width', '50%')
+            .style('width', '60%')
             .style('height', '100%')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width / 2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
@@ -136,7 +136,7 @@ $(document).ready(function () {
 				var div_elem = document.createElement("div");
 				div_elem.setAttribute("id", "question_div");
 				div_elem.style.width = "30vw";
-				div_elem.style.height = "80vh";
+				div_elem.style.height = "100vh";
 				div_elem.style.fontSize = "15px";
 				div_elem.style.float = "right";
 				div_elem.style.position = "relative";
