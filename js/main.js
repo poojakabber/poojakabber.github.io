@@ -135,9 +135,8 @@ $(document).ready(function () {
 			
 				var div_elem = document.createElement("div");
 				div_elem.setAttribute("id", "question_div");
-				div_elem.style.width = "40vw";
+				div_elem.style.width = "20vw";
 				div_elem.style.height = "80vh";
-				div_elem.style.top = "-80vh";
 				div_elem.style.fontSize = "15px";
 				div_elem.style.float = "right";
 				div_elem.style.position = "relative";
