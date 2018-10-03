@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-        const width = 1500,
+        const width = 1400,
             height = 920,
             maxRadius = (Math.min(width, height) / 2) - 5;
         const formatNumber = d3.format(',d');
@@ -135,7 +135,7 @@ $(document).ready(function () {
 			
 				var div_elem = document.createElement("div");
 				div_elem.setAttribute("id", "question_div");
-				div_elem.style.width = "20vw";
+				div_elem.style.width = "30vw";
 				div_elem.style.height = "80vh";
 				div_elem.style.fontSize = "15px";
 				div_elem.style.float = "right";
