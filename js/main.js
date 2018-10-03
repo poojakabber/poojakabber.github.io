@@ -37,7 +37,7 @@ $(document).ready(function () {
         const svg = d3.select('section').append('svg')
             .style('width', '50%')
             .style('height', '100%')
-            .attr('viewBox', `${-width / 4} ${-height / 2} ${width} ${height}`)
+            .attr('viewBox', `${-width / 4} ${-height / 2} ${width / 2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
