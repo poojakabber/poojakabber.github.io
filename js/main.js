@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-        const width = 1700,
-            height = 1220,
+        const width = 1500,
+            height = 920,
             maxRadius = (Math.min(width, height) / 2) - 5;
         const formatNumber = d3.format(',d');
         const x = d3.scaleLinear()
