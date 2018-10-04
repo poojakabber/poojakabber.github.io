@@ -38,7 +38,7 @@ function sunburst()
             .style('width', '60%')
             .style('height', '100%')
             .attr('viewBox', `${-width / 4} ${-height / 2} ${width / 2} ${height}`)
-            .on('click', () => focusOn()); // Reset zoom on canvas click
+            .on('click', () => focusOn({ x0: 0, x1: 1, y0: 0, y1: 1 }, svg)); // Reset zoom on canvas click
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
@@ -53,7 +53,7 @@ function sunburst()
                 .append('g').attr('class', 'slice')
                 .on('click', d => {
                     d3.event.stopPropagation();
-                    focusOn(d);
+                    focusOn(d, svg);
                     createDiv(d);
                 });
             newSlice.append('title')
@@ -84,7 +84,7 @@ function sunburst()
         });
 }
 
-function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }, svg) {
             // Reset to top-level if no data point specified
 	const transition = svg.transition()
 		.duration(750)
