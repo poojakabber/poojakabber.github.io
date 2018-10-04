@@ -82,9 +82,8 @@ function sunburst()
                 .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
                 .text(d => d.data.name);
         });
-}
-
-function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }, svg) {
+		
+		function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }, svg) {
             // Reset to top-level if no data point specified
 	const transition = svg.transition()
 		.duration(750)
@@ -111,9 +110,11 @@ function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }, svg) {
 	}
 }
 	    
-function error_fn(error){
+	function error_fn(error){
 
-	alert(error);
+		alert(error);
+	}
+		
 }
 
 function createDiv(d){
