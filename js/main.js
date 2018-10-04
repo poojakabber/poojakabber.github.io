@@ -173,6 +173,7 @@ $.ajax({
 
 $(document).ready(function () {
 
+	console.log("loaded");
     sunburst();
    
 });
