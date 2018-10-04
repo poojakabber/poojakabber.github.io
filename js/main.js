@@ -54,7 +54,7 @@ function sunburst(json_url, q_json_url)
                 .on('click', d => {
                     d3.event.stopPropagation();
                     focusOn(d);
-                    createDiv(d);
+                    createDiv(d, q_json_url);
                 });
             newSlice.append('title')
                 .text(d => d.data.name + '\n' + formatNumber(d.value));
@@ -117,7 +117,7 @@ function error_fn(error){
 		alert(error);
 }
 
-function createDiv(d){
+function createDiv(d, q_json_url){
 
 var data_name = d.data.name;
 console.log(data_name);
