@@ -1,6 +1,6 @@
-$(document).ready(function () {
-
-        const width = 1400,
+function sunburst()
+{
+	const width = 1500,
             height = 920,
             maxRadius = (Math.min(width, height) / 2) - 5;
         const formatNumber = d3.format(',d');
@@ -34,10 +34,10 @@ $(document).ready(function () {
             const perimeter = r * deltaAngle;
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
-        const svg = d3.select('section').append('svg')
-            .style('width', '60%')
+        const svg = d3.select('body').append('svg')
+            .style('width', '50%')
             .style('height', '100%')
-            .attr('viewBox', `${-width / 4} ${-height / 2} ${width / 2} ${height}`)
+            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
@@ -82,7 +82,9 @@ $(document).ready(function () {
                 .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
                 .text(d => d.data.name);
         });
-        function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+}
+
+ function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
             // Reset to top-level if no data point specified
             const transition = svg.transition()
                 .duration(750)
@@ -100,75 +102,78 @@ $(document).ready(function () {
                 .attrTween('display', d => () => textFits(d) ? null : 'none');
             moveStackToFront(d);
             //
-            function moveStackToFront(elD) {
-                svg.selectAll('.slice').filter(d => d === elD)
-                    .each(function(d) {
-                        this.parentNode.appendChild(this);
-                        if (d.parent) { moveStackToFront(d.parent); }
-                    })
-            }
-        }
+function moveStackToFront(elD) {
+	svg.selectAll('.slice').filter(d => d === elD)
+		.each(function(d) {
+			this.parentNode.appendChild(this);
+			if (d.parent) { moveStackToFront(d.parent); }
+		})
+}
+}
 	    
-		function error_fn(error){
-		
-			alert(error);
+function error_fn(error){
+
+	alert(error);
+}
+
+function createDiv(d){
+
+var data_name = d.data.name;
+console.log(data_name);
+
+$.ajax({
+	url: 'https://poojakabber.github.io/flare_heather_questions.json',
+	type: 'GET',
+	data_name_ajax: data_name,
+	dataType: "json",
+	success: function(json_data)
+	{
+		console.log("Inside success")
+		var div_elem_exists = document.getElementById("question_div");
+		if (div_elem_exists)
+		{
+			div_elem_exists.remove();
 		}
+	
+		var div_elem = document.createElement("div");
+		div_elem.setAttribute("id", "question_div");
+		div_elem.style.width = "40vw";
+		div_elem.style.height = "80vh";
+		div_elem.style.fontSize = "15px";
+		div_elem.style.float = "right";
+		div_elem.style.position = "relative";
+		div_elem.style.right = "10px";
+		data_array = json_data.children;
 		
-		function createDiv(d){
+		//console.log(data_array)
 		
-		var data_name = d.data.name;
-		console.log(data_name);
-		
-		$.ajax({
-			url: 'https://poojakabber.github.io/flare_heather_questions.json',
-			type: 'GET',
-			data_name_ajax: data_name,
-			dataType: "json",
-			success: function(json_data)
-			{
-				console.log("Inside success")
-				var div_elem_exists = document.getElementById("question_div");
-				if (div_elem_exists)
-				{
-					div_elem_exists.remove();
-				}
-			
-				var div_elem = document.createElement("div");
-				div_elem.setAttribute("id", "question_div");
-				div_elem.style.width = "30vw";
-				div_elem.style.height = "100vh";
-				div_elem.style.fontSize = "15px";
-				div_elem.style.float = "right";
-				div_elem.style.position = "relative";
-				div_elem.style.right = "10px";
-				data_array = json_data.children;
+		for(var j = 0; j < data_array.length; j++){
+			console.log("Inside first loop of data array");
+			console.log(data_array[j].name, this.data_name_ajax);
+			if (data_array[j].name == this.data_name_ajax){
+					console.log("If they match")
+					var x = '';
+					for (var k = 0; k < data_array[j].questions.length; k++)
+					{
+						x = x + "<br><br>" + data_array[j].questions[k];
+					}
+					console.log("x: ", x)
+					// var x = data_array[j].questions;
+					div_elem.innerHTML = x;
+					document.body.appendChild(div_elem);
 				
-				//console.log(data_array)
-				
-				for(var j = 0; j < data_array.length; j++){
-					console.log("Inside first loop of data array");
-					console.log(data_array[j].name, this.data_name_ajax);
-					if (data_array[j].name == this.data_name_ajax){
-							console.log("If they match")
-							var x = '';
-							for (var k = 0; k < data_array[j].questions.length; k++)
-							{
-								x = x + "<br><br>" + data_array[j].questions[k];
-							}
-							console.log("x: ", x)
-							// var x = data_array[j].questions;
-							div_elem.innerHTML = x;
-							var section_elem = document.getElementById("right-content");
-							section_elem.appendChild(div_elem);
-						
-					};
-				
-				};
-			},
-			error: error_fn
-		});
+			};
 		
-		}
+		};
+	},
+	error: error_fn
+});
+
+}
+
+$(document).ready(function () {
+
+    sunburst();
    
 });
 
