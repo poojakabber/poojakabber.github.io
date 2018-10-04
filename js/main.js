@@ -1,6 +1,6 @@
 function sunburst()
 {
-	const width = 1500,
+	const width = 1400,
             height = 920,
             maxRadius = (Math.min(width, height) / 2) - 5;
         const formatNumber = d3.format(',d');
@@ -34,10 +34,10 @@ function sunburst()
             const perimeter = r * deltaAngle;
             return d.data.name.length * CHAR_SPACE < perimeter;
         };
-        const svg = d3.select('body').append('svg')
-            .style('width', '50%')
+        const svg = d3.select('section').append('svg')
+            .style('width', '60%')
             .style('height', '100%')
-            .attr('viewBox', `${-width / 4} ${-height / 2} ${width/2} ${height}`)
+            .attr('viewBox', `${-width / 4} ${-height / 2} ${width / 2} ${height}`)
             .on('click', () => focusOn()); // Reset zoom on canvas click
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
@@ -84,31 +84,31 @@ function sunburst()
         });
 }
 
- function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
+function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {
             // Reset to top-level if no data point specified
-            const transition = svg.transition()
-                .duration(750)
-                .tween('scale', () => {
-                    const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
-                        yd = d3.interpolate(y.domain(), [d.y0, 1]);
-                    return t => { x.domain(xd(t)); y.domain(yd(t)); };
-                });
-            
-            transition.selectAll('path.main-arc')
-                .attrTween('d', d => () => arc(d));
-            transition.selectAll('path.hidden-arc')
-                .attrTween('d', d => () => middleArcLine(d));
-            transition.selectAll('text')
-                .attrTween('display', d => () => textFits(d) ? null : 'none');
-            moveStackToFront(d);
-            //
-function moveStackToFront(elD) {
-	svg.selectAll('.slice').filter(d => d === elD)
-		.each(function(d) {
-			this.parentNode.appendChild(this);
-			if (d.parent) { moveStackToFront(d.parent); }
-		})
-}
+	const transition = svg.transition()
+		.duration(750)
+		.tween('scale', () => {
+			const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+				yd = d3.interpolate(y.domain(), [d.y0, 1]);
+			return t => { x.domain(xd(t)); y.domain(yd(t)); };
+		});
+	
+	transition.selectAll('path.main-arc')
+		.attrTween('d', d => () => arc(d));
+	transition.selectAll('path.hidden-arc')
+		.attrTween('d', d => () => middleArcLine(d));
+	transition.selectAll('text')
+		.attrTween('display', d => () => textFits(d) ? null : 'none');
+	moveStackToFront(d);
+	//
+	function moveStackToFront(elD) {
+		svg.selectAll('.slice').filter(d => d === elD)
+			.each(function(d) {
+				this.parentNode.appendChild(this);
+				if (d.parent) { moveStackToFront(d.parent); }
+			})
+	}
 }
 	    
 function error_fn(error){
@@ -137,8 +137,8 @@ $.ajax({
 	
 		var div_elem = document.createElement("div");
 		div_elem.setAttribute("id", "question_div");
-		div_elem.style.width = "40vw";
-		div_elem.style.height = "80vh";
+		div_elem.style.width = "30vw";
+		div_elem.style.height = "100vh";
 		div_elem.style.fontSize = "15px";
 		div_elem.style.float = "right";
 		div_elem.style.position = "relative";
@@ -160,7 +160,8 @@ $.ajax({
 					console.log("x: ", x)
 					// var x = data_array[j].questions;
 					div_elem.innerHTML = x;
-					document.body.appendChild(div_elem);
+					var section_elem = document.getElementById("right-content");
+					section_elem.appendChild(div_elem);
 				
 			};
 		
@@ -174,7 +175,6 @@ $.ajax({
 $(document).ready(function () {
 
 	console.log("loaded");
-    sunburst();
+   sunburst(); 
    
 });
-
