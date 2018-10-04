@@ -1,4 +1,4 @@
-function sunburst()
+function sunburst(json_url, q_json_url)
 {
 	const width = 1400,
             height = 920,
@@ -42,7 +42,7 @@ function sunburst()
 			
 		//$svg.css({top: 200, left: 200, position:'absolute'});
 			
-        d3.json('https://poojakabber.github.io/flare_heather.json', (error, root) => {
+        d3.json(json_url, (error, root) => {
             if (error) throw error;
             root = d3.hierarchy(root);
             root.sum(d => d.size);
@@ -123,7 +123,7 @@ var data_name = d.data.name;
 console.log(data_name);
 
 $.ajax({
-	url: 'https://poojakabber.github.io/flare_heather_questions.json',
+	url: q_json_url,
 	type: 'GET',
 	data_name_ajax: data_name,
 	dataType: "json",
@@ -176,6 +176,8 @@ $.ajax({
 $(document).ready(function () {
 
 	console.log("loaded");
-   sunburst(); 
+	var json_url = 'https://poojakabber.github.io/flare_heather.json'
+	var q_json_url = 'https://poojakabber.github.io/flare_heather_questions.json'
+   sunburst(json_url, q_json_url); 
    
 });
