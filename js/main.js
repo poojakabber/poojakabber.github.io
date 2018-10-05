@@ -1,6 +1,16 @@
 function sunburst(json_url, q_json_url)
 {
 	console.log("in sunburst");
+
+	var svg_elem = document.getElementsByTagName("svg");
+	var n_svg = svg_elem.length;
+	if n_svg > 0:
+		svg_elem[0].parentNode.removeChild(svg_elem[0]);
+		
+	var q_elem = document.getElementById("question_div");
+	if q_elem > 0:
+		q_elem.parentNode.removeChild(q_elem);
+	
 	const width = 1400,
             height = 920,
             maxRadius = (Math.min(width, height) / 2) - 5;
