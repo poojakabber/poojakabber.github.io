@@ -1,5 +1,6 @@
 function sunburst(json_url, q_json_url)
 {
+	console.log("in sunburst");
 	const width = 1400,
             height = 920,
             maxRadius = (Math.min(width, height) / 2) - 5;
