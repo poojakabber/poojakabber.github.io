@@ -187,8 +187,8 @@ $.ajax({
 $(document).ready(function () {
 
 	console.log("loaded");
-	var json_url = 'https://poojakabber.github.io/flare_heather.json'
-	var q_json_url = 'https://poojakabber.github.io/flare_heather_questions.json'
+	var json_url = 'https://poojakabber.github.io/data/flare_heather.json'
+	var q_json_url = 'https://poojakabber.github.io/data/flare_heather_questions.json'
    sunburst(json_url, q_json_url); 
    
 });
