@@ -13,15 +13,40 @@ function change()
 	var checked = [];
 	$.each($("input[name='MSFT']:checked"), function(){ checked.push($(this).attr('id')); });
 	
-	console.log(checked);
-	console.log(analyst);
+	if (analyst == 'single_measure'){
+		
+		if (checked.includes("comp")){
+			
+			if (checked.includes("peer-chk")){ json_url = ''; q_json_url = ''; }
+			
+			else { json_url = 'flare_peter_deutche.json'; q_json_url = 'flare_peter_deutche_questions.json'; }
+			
+		}
+		
+		else if (checked.includes("peer-chk")) { json_url = 'flare_peter_peer.json'; q_json_url = 'flare_peter_peer_questions.json'; }
+		
+		//else { json_url = ; q_json_url = ; }
+		
+	}
 	
-	// if(analyst == 'single_measure'){
+	else if (analyst == 'multiple_measure') {
 		
+		if (checked.includes("comp")){
+			
+			if (checked.includes("peer-chk")){ json_url = ''; q_json_url = ''; }
+			
+			else { json_url = 'flare_bruce_deutche.json'; q_json_url = 'flare_bruce_deutche_questions.json'; }
+			
+		}
 		
+		else if (checked.includes("peer-chk")) { json_url = 'flare_bruce_peer.json'; q_json_url = 'flare_bruce_peer_questions.json'; }
 		
-	// }
-	// if(analyst == 'multiple_measure'){}
+		//else { json_url = ; q_json_url = ; }
+		
+	}
+	
+	sunburst(json_url, q_json_url);
+	
 }
 
 function sunburst(json_url, q_json_url)
