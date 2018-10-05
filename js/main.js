@@ -11,7 +11,7 @@ function change()
 	
 	var analyst = $('input[name=measure]:checked', '.filter-items-list').attr('id');
 	var checked = [];
-	$.each($("input[name='MSFT']:checked"), function(){ checked.push($(this).attr('id'); });
+	$.each($("input[name='MSFT']:checked"), function(){ checked.push($(this).attr('id')); });
 	
 	console.log(checked);
 	console.log(analyst);
