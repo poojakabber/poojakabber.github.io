@@ -1,7 +1,5 @@
-function sunburst(json_url, q_json_url)
+function change()
 {
-	console.log("in sunburst");
-
 	var svg_elem = document.getElementsByTagName("svg");
 	var n_svg = svg_elem.length;
 	if(n_svg > 0){
@@ -10,6 +8,25 @@ function sunburst(json_url, q_json_url)
 	var q_elem = document.getElementById("question_div");
 	if(q_elem > 0){
 	q_elem.parentNode.removeChild(q_elem);}
+	
+	var analyst = $('input[name=measure]:checked', '.filter-items-list').attr('id');
+	var checked = [];
+	$.each($("input[name='MSFT']:checked"), function(){ checked.push($(this).attr('id'); });
+	
+	console.log(checked);
+	console.log(analyst);
+	
+	// if(analyst == 'single_measure'){
+		
+		
+		
+	// }
+	// if(analyst == 'multiple_measure'){}
+}
+
+function sunburst(json_url, q_json_url)
+{
+	console.log("in sunburst");
 	
 	const width = 1400,
             height = 920,
@@ -187,8 +204,8 @@ $.ajax({
 $(document).ready(function () {
 
 	console.log("loaded");
-	var json_url = 'https://poojakabber.github.io/data/flare_peter_deutche.json'
-	var q_json_url = 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json'
+	var json_url = 'https://poojakabber.github.io/flare_heather.json'
+	var q_json_url = 'https://poojakabber.github.io/flare_heather_questions.json'
    sunburst(json_url, q_json_url); 
    
 });
