@@ -43,19 +43,19 @@
                     <div class="filter-section">
                         <h3 class="showdata-for">Show Data For</h3>
                         <div class="filter-panel">
-                            <input type="checkbox" id="comp" name="MSFT" class="chk" />
+                            <input type="checkbox" id="comp" name="MSFT" class="chk" checked onclick="change()"/>
                             <label for="comp">My company</label>
                         </div>
                         <div class="filter-panel">
-                            <input type="checkbox" id="peer-chk" name="MSFT" class="chk" />
+                            <input type="checkbox" id="peer-chk" name="MSFT" class="chk" onclick="change()"/>
                             <label for="peer-chk"><span class="peer-badge">P</span>Peers</label>
                         </div>
                         <div class="filter-panel">
-                            <input type="checkbox" id="other-comp" name="MSFT" class="chk" />
+                            <input type="checkbox" id="other-comp" name="MSFT" class="chk" onclick="change()"/>
                             <label for="other-comp">Other companies</label>
                         </div>
                         <div class="filter-panel">
-                            <input type="checkbox" id="sel-tickr" name="MSFT" class="chk" />
+                            <input type="checkbox" id="sel-tickr" name="MSFT" class="chk" onclick="change()"/>
                             <label for="sel-tickr">Show only reports with selected ticker as primary</label>
                         </div>
 
@@ -78,10 +78,10 @@
                             <div class="filter-controls">
                                     <ul class="filter-items-list">
                                     <li>
-                                    <input type="radio" class="radio" checked="checked" id="single_measure" name="measure"><label for="single_measure" onclick="sunburst('https://poojakabber.github.io/data/flare_peter_deutche.json', 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json')">Peter Lenardos</label>
+                                    <input type="radio" class="radio" checked="checked" id="single_measure" name="measure"><label for="single_measure" onclick="change()">Heather Bellini</label>
                                     </li>
                                     <li>
-                                    <input type="radio" class="radio" id="multiple_measure" name="measure"><label for="multiple_measure" onclick="sunburst('https://poojakabber.github.io/data/flare_bruce_deutche.json', 'https://poojakabber.github.io/data/flare_bruce_deutche_questions.json')">Bruce Hamilton</label>
+                                    <input type="radio" class="radio" id="multiple_measure" name="measure"><label for="multiple_measure" onclick="change()">Phil Winslow</label>
                                     </li>
                                 </ul>
                             </div>
