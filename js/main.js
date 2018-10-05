@@ -17,7 +17,7 @@ function change()
 		
 		if (checked.includes("comp")){
 			
-			if (checked.includes("peer-chk")){ json_url = ''; q_json_url = ''; }
+			if (checked.includes("peer-chk")){ json_url = 'https://poojakabber.github.io/data/flare_peter_both.json'; q_json_url = 'https://poojakabber.github.io/data/flare_peter_both_questions.json'; }
 			
 			else { json_url = 'https://poojakabber.github.io/data/flare_peter_deutche.json'; q_json_url = 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json'; }
 			
@@ -33,7 +33,7 @@ function change()
 		
 		if (checked.includes("comp")){
 			
-			if (checked.includes("peer-chk")){ json_url = ''; q_json_url = ''; }
+			if (checked.includes("peer-chk")){ json_url = 'https://poojakabber.github.io/data/flare_bruce_both.json'; q_json_url = 'https://poojakabber.github.io/data/flare_bruce_both_questions.json'; }
 			
 			else { json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche.json'; q_json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche_questions.json'; }
 			
