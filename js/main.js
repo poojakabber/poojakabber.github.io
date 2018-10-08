@@ -1,3 +1,52 @@
+function change()
+{
+	var svg_elem = document.getElementsByTagName("svg");
+	var n_svg = svg_elem.length;
+	if(n_svg > 0){
+	svg_elem[0].parentNode.removeChild(svg_elem[0]);}
+		
+	var q_elem = document.getElementById("question_div");
+	if(q_elem > 0){
+	q_elem.parentNode.removeChild(q_elem);}
+	
+	var analyst = $('input[name=measure]:checked', '.filter-items-list').attr('id');
+	var checked = [];
+	$.each($("input[name='MSFT']:checked"), function(){ checked.push($(this).attr('id')); });
+	
+	if (analyst == 'single_measure'){
+		
+		if (checked.includes("comp")){
+			
+			if (checked.includes("peer-chk")){ json_url = 'https://poojakabber.github.io/data/flare_peter_both.json'; q_json_url = 'https://poojakabber.github.io/data/flare_peter_both_questions.json'; sunburst(json_url, q_json_url);}
+			
+			else { json_url = 'https://poojakabber.github.io/data/flare_peter_deutche.json'; q_json_url = 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json'; sunburst(json_url, q_json_url);}
+			
+		}
+		
+		else if (checked.includes("peer-chk")) { json_url = 'https://poojakabber.github.io/data/flare_peter_peer.json'; q_json_url = 'https://poojakabber.github.io/data/flare_peter_peer_questions.json'; sunburst(json_url, q_json_url);}
+		
+		//else { json_url = ; q_json_url = ; }
+		
+	}
+	
+	else if (analyst == 'multiple_measure') {
+		
+		if (checked.includes("comp")){
+			
+			if (checked.includes("peer-chk")){ json_url = 'https://poojakabber.github.io/data/flare_bruce_both.json'; q_json_url = 'https://poojakabber.github.io/data/flare_bruce_both_questions.json'; sunburst(json_url, q_json_url);}
+			
+			else { json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche.json'; q_json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche_questions.json'; sunburst(json_url, q_json_url);}
+			
+		}
+		
+		else if (checked.includes("peer-chk")) { json_url = 'https://poojakabber.github.io/data/flare_bruce_peer.json'; q_json_url = 'https://poojakabber.github.io/data/flare_bruce_peer_questions.json'; sunburst(json_url, q_json_url);}
+		
+		//else { json_url = ; q_json_url = ; }
+		
+	}
+	
+}
+
 function change_multiple_measure()
 {
 	var svg_elem = document.getElementsByTagName("svg");
