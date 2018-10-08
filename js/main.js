@@ -19,17 +19,20 @@ function change()
 	var checked = [];
 	$.each($("input[name='MSFT']:checked"), function(){ checked.push($(this).attr('id')); });
 	
+	var json_url = '';
+	var q_json_url = '';
+	
 	if (analyst == 'single_measure'){
 		
 		if (checked.includes("comp")){
 			
-			if (checked.includes("peer-chk")){ var json_url = 'https://poojakabber.github.io/data/flare_peter_both.json'; var q_json_url = 'https://poojakabber.github.io/data/flare_peter_both_questions.json'; sunburst(json_url, q_json_url);}
+			if (checked.includes("peer-chk")){ json_url = 'https://poojakabber.github.io/data/flare_peter_both.json';  q_json_url = 'https://poojakabber.github.io/data/flare_peter_both_questions.json'; sunburst(json_url, q_json_url);}
 			
-			else { var json_url = 'https://poojakabber.github.io/data/flare_peter_deutche.json'; var q_json_url = 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json'; sunburst(json_url, q_json_url);}
+			else {  json_url = 'https://poojakabber.github.io/data/flare_peter_deutche.json';  q_json_url = 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json'; sunburst(json_url, q_json_url);}
 			
 		}
 		
-		else if (checked.includes("peer-chk")) { var json_url = 'https://poojakabber.github.io/data/flare_peter_peer.json'; var q_json_url = 'https://poojakabber.github.io/data/flare_peter_peer_questions.json'; sunburst(json_url, q_json_url);}
+		else if (checked.includes("peer-chk")) {  json_url = 'https://poojakabber.github.io/data/flare_peter_peer.json';  q_json_url = 'https://poojakabber.github.io/data/flare_peter_peer_questions.json'; sunburst(json_url, q_json_url);}
 		
 		//else { json_url = ; q_json_url = ; }
 		
@@ -39,13 +42,13 @@ function change()
 		
 		if (checked.includes("comp")){
 			
-			if (checked.includes("peer-chk")){ var json_url = 'https://poojakabber.github.io/data/flare_bruce_both.json'; var q_json_url = 'https://poojakabber.github.io/data/flare_bruce_both_questions.json'; sunburst(json_url, q_json_url);}
+			if (checked.includes("peer-chk")){  json_url = 'https://poojakabber.github.io/data/flare_bruce_both.json';  q_json_url = 'https://poojakabber.github.io/data/flare_bruce_both_questions.json'; sunburst(json_url, q_json_url);}
 			
-			else { var json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche.json'; var q_json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche_questions.json'; sunburst(json_url, q_json_url);}
+			else {  json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche.json';  q_json_url = 'https://poojakabber.github.io/data/flare_bruce_deutche_questions.json'; sunburst(json_url, q_json_url);}
 			
 		}
 		
-		else if (checked.includes("peer-chk")) { var json_url = 'https://poojakabber.github.io/data/flare_bruce_peer.json'; var q_json_url = 'https://poojakabber.github.io/data/flare_bruce_peer_questions.json'; sunburst(json_url, q_json_url);}
+		else if (checked.includes("peer-chk")) {  json_url = 'https://poojakabber.github.io/data/flare_bruce_peer.json';  q_json_url = 'https://poojakabber.github.io/data/flare_bruce_peer_questions.json'; sunburst(json_url, q_json_url);}
 		
 		//else { json_url = ; q_json_url = ; }
 		
