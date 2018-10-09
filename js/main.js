@@ -268,8 +268,8 @@ $.ajax({
 $(document).ready(function () {
 
 	console.log("loaded");
-	var json_url = 'https://poojakabber.github.io/data/flare_peter_deutche.json'; 
-	var q_json_url = 'https://poojakabber.github.io/data/flare_peter_deutche_questions.json';
+	var json_url = 'https://poojakabber.github.io/data/heather_peer_6months.json'; 
+	var q_json_url = 'https://poojakabber.github.io/data/heather_peer_6months_questions.json';
    sunburst(json_url, q_json_url); 
    
 });
