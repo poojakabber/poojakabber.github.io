@@ -62,26 +62,26 @@
                         <div class="filter-panel search-keyword">
                             <label class="fw-bold">Date Range</label>
                             <div class="dropdown col-xs-12">
-                                <button class="btn btn-default dropdown-toggle col-xs-12" type="button" id="menu1" data-toggle="dropdown">Last 2 years
+                                <button class="btn btn-default dropdown-toggle col-xs-12" type="button" id="menu1" data-toggle="dropdown">Date Range
                                     <span class="caret"></span></button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Last quarter</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Last 6 months</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Last 1 year</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Last 2 years</a></li>
+                                    <li role="presentation" id = "quarter" onclick="change(this.id)"><a role="menuitem" tabindex="-1" href="#">Last quarter</a></li>
+                                    <li role="presentation" id = "6months" onclick="change(this.id)"><a role="menuitem" tabindex="-1" href="#">Last 6 months</a></li>
+                                    <li role="presentation" id = "1year" onclick="change(this.id)"><a role="menuitem" tabindex="-1" href="#">Last 1 year</a></li>
+                                    <li role="presentation" id = "2years" onclick="change(this.id)"><a role="menuitem" tabindex="-1" href="#">Last 2 years</a></li>
                                 </ul>
                             </div>
 
                         </div>
                         <div class="filter-panel search-keyword search-analysts">
-                            <h3 class="fw-bold">Active Analysts</h3>
+                            <h3 class="fw-bold">Analysts</h3>
                             <div class="filter-controls">
                                     <ul class="filter-items-list">
                                     <li>
-                                    <input type="radio" class="radio" checked="checked" id="single_measure" name="measure" onclick = "change()"><label for="single_measure">Peter Lenardos (72%)</label>
+                                    <input type="radio" class="radio" checked="checked" id="single_measure" name="measure" onclick = "change()"><label for="single_measure">Peter Lenardos</label>
                                     </li>
                                     <li>
-                                    <input type="radio" class="radio" id="multiple_measure" name="measure" onclick = "change()"><label for="multiple_measure">Bruce Hamilton (84%)</label>
+                                    <input type="radio" class="radio" id="multiple_measure" name="measure" onclick = "change()"><label for="multiple_measure">Bruce Hamilton</label>
                                     </li>
                                 </ul>
                             </div>
