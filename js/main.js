@@ -53,7 +53,11 @@ function change(id = g_id)
 		
 		else if (checked.includes("peer-chk")) 
 		{
-			
+			if (id == '6months') {g_id = id; json_url = 'https://poojakabber.github.io/data/heather_peeronly_6months.json'; q_json_url = 'https://poojakabber.github.io/data/heather_peeronly_6months_questions.json'; sunburst(json_url, q_json_url);}
+				
+			else if (id == '1year') {g_id = id; json_url = 'https://poojakabber.github.io/data/heather_peeronly_1year.json'; q_json_url = 'https://poojakabber.github.io/data/heather_peeronly_1year_questions.json'; sunburst(json_url, q_json_url);}
+				
+			else if (id == '2years') {g_id = id; json_url = 'https://poojakabber.github.io/data/heather_peeronly_2years.json'; q_json_url = 'https://poojakabber.github.io/data/heather_peeronly_2years_questions.json'; sunburst(json_url, q_json_url);}
 		}
 	}
 	
@@ -83,7 +87,11 @@ function change(id = g_id)
 		
 		else if (checked.includes("peer-chk")) 
 		{
-			
+			if (id == '6months') {g_id = id; json_url = 'https://poojakabber.github.io/data/raimo_peeronly_6months.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peeronly_6months_questions.json'; sunburst(json_url, q_json_url);}
+				
+			else if (id == '1year') {g_id = id; json_url = 'https://poojakabber.github.io/data/raimo_peeronly_1year.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peeronly_1year_questions.json'; sunburst(json_url, q_json_url);}
+				
+			else if (id == '2years') {g_id = id; json_url = 'https://poojakabber.github.io/data/raimo_peeronly_2years.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peeronly_2years_questions.json'; sunburst(json_url, q_json_url);}
 		}
 		
 	}
