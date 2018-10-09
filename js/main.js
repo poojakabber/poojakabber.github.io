@@ -61,20 +61,20 @@ function change(id = "6months")
 			
 			if (checked.includes("peer-chk"))
 			{  
-				if (id == '6months') {json_url = 'https://poojakabber.github.io/data/heather_peer_6months.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peer_6months_questions.json'; sunburst(json_url, q_json_url);}
+				if (id == '6months') {json_url = 'https://poojakabber.github.io/data/raimo_peer_6months.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peer_6months_questions.json'; sunburst(json_url, q_json_url);}
 				
-				else if (id == '1year') {json_url = 'https://poojakabber.github.io/data/heather_peer_1year.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peer_1year_questions.json'; sunburst(json_url, q_json_url);}
+				else if (id == '1year') {json_url = 'https://poojakabber.github.io/data/raimo_peer_1year.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peer_1year_questions.json'; sunburst(json_url, q_json_url);}
 				
-				else if (id == '2years') {json_url = 'https://poojakabber.github.io/data/heather_peer_2years.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peer_2years_questions.json'; sunburst(json_url, q_json_url);}
+				else if (id == '2years') {json_url = 'https://poojakabber.github.io/data/raimo_peer_2years.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_peer_2years_questions.json'; sunburst(json_url, q_json_url);}
 			}
 			
 			else 
 			{  
-				if (id == '6months') {json_url = 'https://poojakabber.github.io/data/heather_6months.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_6months_questions.json'; sunburst(json_url, q_json_url);}
+				if (id == '6months') {json_url = 'https://poojakabber.github.io/data/raimo_6months.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_6months_questions.json'; sunburst(json_url, q_json_url);}
 				
-				else if (id == '1year') {json_url = 'https://poojakabber.github.io/data/heather_1year.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_1year_questions.json'; sunburst(json_url, q_json_url);}
+				else if (id == '1year') {json_url = 'https://poojakabber.github.io/data/raimo_1year.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_1year_questions.json'; sunburst(json_url, q_json_url);}
 				
-				else if (id == '2years') {json_url = 'https://poojakabber.github.io/data/heather_2years.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_2years_questions.json'; sunburst(json_url, q_json_url);}
+				else if (id == '2years') {json_url = 'https://poojakabber.github.io/data/raimo_2years.json'; q_json_url = 'https://poojakabber.github.io/data/raimo_2years_questions.json'; sunburst(json_url, q_json_url);}
 			}
 			
 		}
