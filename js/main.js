@@ -257,21 +257,27 @@ $.ajax({
 					console.log("If they match")
 					data_array_questions = data_array[j].children;
 					
-					var x = '';
+					var c_ul = document.createElement("ul");
+					// c_ul.setAttribute('id', 'c_ul');
 					
 					for (var k = 0; k < data_array_questions.length; k++)
 					{
-						var y = '';
-						x = x + "<br>" + data_array_questions[k].name;
+						var c_ul_name = document.createElement("li");
+						c_ul_name.innerHTML = data_array_questions[k].name;
+						c_ul.appendChild(c_ul_name);
+						
+						var q_ul = document.createElement("ul");
+						// q_ul.setAttribute('id', 'q_ul');
+						
 						for (var l = 0; l < data_array_questions[k].questions.length; l++)
 						{
-							y = y + "<br><br>" + data_array_questions[k].questions[l];
-							console.log("questions: ", data_array_questions[k].questions[l]);
+							var q_ul_question = document.createElement("li");
+							q_ul_question.innerHTML = data_array_questions[k].questions[l];
+							q_ul.appendChild(q_ul_question);
 						}
-						x = x + "<br>" + y;
+						c_ul.appendChild(q_ul);
 					}
-					console.log("x: ", x)
-					div_elem.innerHTML = x;
+					div_elem.appendChild(c_ul);
 					var section_elem = document.getElementById("right-content");
 					section_elem.appendChild(div_elem);
 				
