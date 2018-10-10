@@ -262,7 +262,7 @@ $.ajax({
 					for (var k = 0; k < data_array_questions.length; k++)
 					{
 						var y = '';
-						x = x + "<br>" + data_array_questions.name;
+						x = x + "<br>" + data_array_questions[k].name;
 						for (var l = 0; l < data_array_questions[k].questions.length; l++)
 						{
 							y = y + "<br><br>" + data_array_questions[k].questions[l];
