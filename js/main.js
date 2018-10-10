@@ -265,7 +265,7 @@ $.ajax({
 						x = x + "<br>" + data_array_questions.name;
 						for (var l = 0; l < data_array_questions[k].questions.length; l++)
 						{
-							y = y + "<br><br>" + data_array_questions.questions[l];
+							y = y + "<br><br>" + data_array_questions[k].questions[l];
 							x = x + "<br>" + y;
 						}
 					}
