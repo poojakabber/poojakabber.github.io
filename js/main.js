@@ -267,14 +267,9 @@ $.ajax({
 						{
 							y = y + "<br><br>" + data_array_questions[k].questions[l];
 							console.log("questions: ", data_array_questions[k].questions[l]);
-							x = x + "<br>" + y;
 						}
+						x = x + "<br>" + y;
 					}
-					
-					// for (var k = 0; k < data_array[j].questions.length; k++)
-					// {
-						// x = x + "<br><br>" + data_array[j].questions[k];
-					// }
 					console.log("x: ", x)
 					div_elem.innerHTML = x;
 					var section_elem = document.getElementById("right-content");
