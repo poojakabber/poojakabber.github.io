@@ -266,6 +266,7 @@ $.ajax({
 						for (var l = 0; l < data_array_questions[k].questions.length; l++)
 						{
 							y = y + "<br><br>" + data_array_questions[k].questions[l];
+							console.log("questions: ", data_array_questions[k].questions[l]);
 							x = x + "<br>" + y;
 						}
 					}
