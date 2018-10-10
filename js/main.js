@@ -256,6 +256,7 @@ $.ajax({
 			if (data_array[j].name == this.data_name_ajax){
 					console.log("If they match")
 					data_array_questions = data_array[j].children;
+					console.log("data_array_questions: ", data_array_questions);
 					
 					var x = '';
 					
