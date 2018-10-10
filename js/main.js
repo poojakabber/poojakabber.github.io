@@ -251,8 +251,8 @@ $.ajax({
 		//console.log(data_array)
 		
 		for(var j = 0; j < data_array.length; j++){
-			console.log("Inside first loop of data array");
-			console.log(data_array[j].name, this.data_name_ajax);
+			// console.log("Inside first loop of data array");
+			// console.log(data_array[j].name, this.data_name_ajax);
 			if (data_array[j].name == this.data_name_ajax){
 					console.log("If they match")
 					data_array_questions = data_array[j].children;
