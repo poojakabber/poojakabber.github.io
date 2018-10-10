@@ -255,13 +255,26 @@ $.ajax({
 			console.log(data_array[j].name, this.data_name_ajax);
 			if (data_array[j].name == this.data_name_ajax){
 					console.log("If they match")
+					data_array_questions = data_array[j].children;
+					
 					var x = '';
-					for (var k = 0; k < data_array[j].questions.length; k++)
+					
+					for (var k = 0; k < data_array_questions.length; k++)
 					{
-						x = x + "<br><br>" + data_array[j].questions[k];
+						var y = '';
+						x = x + "<br>" + data_array_questions.name;
+						for (var l = 0; l < data_array_questions.questions.length; l++)
+						{
+							y = y + "<br><br>" + data_array_questions.questions[l];
+							x = x + "<br>" + y;
+						}
 					}
+					
+					// for (var k = 0; k < data_array[j].questions.length; k++)
+					// {
+						// x = x + "<br><br>" + data_array[j].questions[k];
+					// }
 					console.log("x: ", x)
-					// var x = data_array[j].questions;
 					div_elem.innerHTML = x;
 					var section_elem = document.getElementById("right-content");
 					section_elem.appendChild(div_elem);
@@ -280,6 +293,6 @@ $(document).ready(function () {
 	console.log("loaded");
 	var json_url = 'https://poojakabber.github.io/data/heather_6months.json'; 
 	var q_json_url = 'https://poojakabber.github.io/data/heather_6months_questions.json';
-   sunburst(json_url, q_json_url); 
+	sunburst(json_url, q_json_url); 
    
 });
