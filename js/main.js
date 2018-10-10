@@ -258,20 +258,24 @@ $.ajax({
 					data_array_questions = data_array[j].children;
 					
 					var c_ul = document.createElement("ul");
+					c_ul.style.listStyleType = "disc";
 					// c_ul.setAttribute('id', 'c_ul');
 					
 					for (var k = 0; k < data_array_questions.length; k++)
 					{
 						var c_ul_name = document.createElement("li");
+						c_ul_name.style.listStyleType = 'disc';
 						c_ul_name.innerHTML = data_array_questions[k].name;
 						c_ul.appendChild(c_ul_name);
 						
 						var q_ul = document.createElement("ul");
+						q_ul.style.listStyleType = 'disc';
 						// q_ul.setAttribute('id', 'q_ul');
 						
 						for (var l = 0; l < data_array_questions[k].questions.length; l++)
 						{
 							var q_ul_question = document.createElement("li");
+							q_ul_question.style.listStyleType = 'disc';
 							q_ul_question.innerHTML = data_array_questions[k].questions[l];
 							q_ul.appendChild(q_ul_question);
 						}
