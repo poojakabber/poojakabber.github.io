@@ -7,6 +7,7 @@
       rect.bordered {
         stroke: #E6E6E6;
         stroke-width:2px;   
+        position: relative;
       }
       text.mono {
         font-size: 9pt;
@@ -189,16 +190,16 @@
           legend.enter().append("g")
               .attr("class", "legend");
           legend.append("rect")
-            .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
-            .attr("y", -50)
+            .attr("x", function(d, i) { return (50 + 3*i).toString() + "vw"; })
+            .attr("y", "-60")
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
             .style("fill", function(d, i) { return colors[i]; });
           legend.append("text")
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
-            .attr("x", function(d, i) { return (legendElementWidth * i) + 800; })
-            .attr("y", -50 + gridSize);
+            .attr("x", function(d, i) { return (50 + 3*i).toString() + "vw"; })
+            .attr("y", -60 + gridSize);
           legend.exit().remove();
         });  
       };
