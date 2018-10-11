@@ -190,7 +190,7 @@
           legend.enter().append("g")
               .attr("class", "legend");
           legend.append("rect")
-            .attr("x", function(d, i) { return toString(legendElementWidth + 1.5*i) + "vw"; })
+            .attr("x", function(d, i) { return toString(50 + 1.5*i) + "vw"; })
             .attr("y", "-60")
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
@@ -198,7 +198,7 @@
           legend.append("text")
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
-            .attr("x", function(d, i) { return toString(legendElementWidth + 1.5*i) + "vw"; })
+            .attr("x", function(d, i) { return toString(50 + 1.5*i) + "vw"; })
             .attr("y", -60 + gridSize);
           legend.exit().remove();
         });  
