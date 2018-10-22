@@ -104,7 +104,7 @@ function sunburst(json_url, q_json_url)
 	
 	const width = 1400,
             height = 920,
-            maxRadius = (Math.min(width, height) / 2) - 5;
+            maxRadius = (Math.min(width, height) / 4) - 5;
         const formatNumber = d3.format(',d');
         const x = d3.scaleLinear()
             .range([0, 2 * Math.PI])
