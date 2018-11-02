@@ -1,0 +1,244 @@
+<html>
+
+<head>
+
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <style>
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a></div>
+  <script>
+    var myConfig = {
+      "globals": {
+        "font-family": "Roboto",
+      },
+      "graphset": [{
+        "type": "piano",
+        "theme": "classic",
+        "title": {
+          "text": "Frequency Heatmap",
+          "background-color": "none",
+          "font-color": "#05636c",
+          "font-size": "24px",
+          "adjust-layout": true,
+          "padding-bottom": 25
+        },
+        "subtitle": {
+          "y": "38.5px",
+          "x": "-9.5px",
+          "text": "Popular Topics vs. Analysts",
+          "background-color": "none",
+          "font-color": "#05636c",
+          "font-size": "14px",
+          "height": "25px"
+        },
+        "backgroundColor": "#fff",
+        "plotarea": {
+          "margin": "dynamic"
+        },
+        "scaleX": {
+          "placement": "opposite",
+          "lineWidth": 0,
+          "item": {
+            "border-color": "none",
+            "size": "13px",
+            "font-color": "#05636c"
+          },
+          "guide": {
+            "visible": false
+          },
+          "tick": {
+            "visible": false
+          },
+          "values": ["growth rate", "gross margin", "pc market", "cloud business", "competetive environment", "red hat", 'billings growth', 'cash flow', 'renewal rate', 'existing customers'],
+          "zooming": true,
+          "zoom-snap": true,
+          //"zoomTo": [2,5]
+        },
+        "zoom": {
+          "preserve-zoom": true,
+          "background-color": "#e5e8ea",
+          "border-color": "#009",
+          "border-width": 2,
+          "alpha": 0.75
+        },
+        "scroll-x": {
+          "bar": {
+            "border-radius": 3,
+            "background-color": "#01579B",
+            "alpha": .5
+          },
+          "handle": {
+            "border-radius": 5,
+            "background-color": "#01579B",
+            "border-top": "none",
+            "border-right": "none",
+            "border-bottom": "none",
+            "border-left": "none"
+          }
+        },
+        "scroll-y": {
+          "bar": {
+            "border-radius": 3,
+            "background-color": "#01579B",
+            "alpha": .5
+          },
+          "handle": {
+            "border-radius": 5,
+            "background-color": "#01579B",
+            "border-top": "none",
+            "border-right": "none",
+            "border-bottom": "none",
+            "border-left": "none"
+          }
+        },
+        "scaleY": {
+          "zooming": true,
+          "lineWidth": 0,
+          "mirrored": true,
+          "tick": {
+            "visible": false
+          },
+          "guide": {
+            "visible": false
+          },
+          "item": {
+            "border-color": "none",
+            "size": "13px",
+            "font-color": "#05636c"
+          },
+          "values": ["Heather Bellini", "Brent Thill", "Raimo Lenschow", "Walter Pritchard", "Kash Rangan", "John DiFucci", "Michael Turits"]
+        },
+        "legend": {
+          "layout": "x6",
+          "width": "80%",
+          "shadow": false,
+          "border-width": 0,
+          "align": "center",
+          "vertical-align": "bottom",
+          "toggle-action": "none",
+          "item": {
+            "border-color": "none",
+            "size": "13px",
+            "font-color": "#05636c"
+          },
+          "marker": {
+            "type": "square",
+            "border-radius": "8",
+            "border-color": "none",
+            "size": "13px"
+          },
+          "footer": {
+            "border-color": "none",
+            "background-color": "none",
+            "text-align": "center",
+            "font-size": "14px",
+            "font-color": "#05636c"
+          }
+        },
+        "plot": {
+          "aspect": "none",
+          "borderWidth": 2,
+          "borderColor": "#eeeeee",
+          "borderRadius": 7,
+          "tooltip": {
+            "font-size": "14px",
+            "font-color": "white",
+            "text": " The frequency is %v.",
+            "text-align": "left"
+          },
+          "rules": [{
+            "rule": "%node-value > 6",
+            "backgroundColor": "#081D58",
+            "font-color": "#05636c"
+          }, {
+            "rule": "%node-value > 4 && %node-value <= 5",
+            "backgroundColor": "#253494",
+            "font-color": "#05636c"
+          }, {
+            "rule": "%node-value > 3 && %node-value <= 4",
+            "backgroundColor": "#225EA8",
+            "font-color": "#05636c"
+          }, {
+            "rule": "%node-value > 2 && %node-value <= 3",
+            "backgroundColor": "#1D91C0",
+            "font-color": "#05636c"
+          }, {
+            "rule": "%node-value > 1 && %node-value <= 2",
+            "backgroundColor": "#41B6C4",
+            "font-color": "#05636c"
+          }, {
+            "rule": "%node-value > 0 && %node-value <= 1",
+            "backgroundColor": "#7FCDBB",
+            "font-color": "#05636c"
+          }]
+        },
+        "series": [{
+          "values": [1, 1, 1, 2, 2, 2, 3, 4, 2, 1],
+          "text": "2-3",
+          "legend-marker": {
+            "backgroundColor": "#7FCDBB"
+          }
+        }, {
+          "values": [2, 2, 2, 2, 2, 2, 1, 3, 4, 2],
+          "text": "3-4",
+          "legend-marker": {
+            "backgroundColor": "#41B6C4"
+          }
+        }, {
+          "values": [2, 2, 2, 2, 3, 3, 5, 3, 4, 1],
+          "text": "4-5",
+          "legend-marker": {
+            "backgroundColor": "#1D91C0"
+          }
+        }, {
+          "values": [2, 3, 3, 2, 3, 3, 3, 2, 3, 5],
+          "text": "5-6",
+          "legend-marker": {
+            "backgroundColor": "#225EA8"
+          }
+        }, {
+          "values": [3, 2, 3, 2, 3, 3, 2, 1, 2, 1],
+          "text": "6-7",
+          "legend-marker": {
+            "backgroundColor": "#253494"
+          }
+        }, {
+          "values": [2, 3, 5, 6, 5, 6, 3, 3, 3, 2],
+          "text": "7-8",
+          "legend-marker": {
+            "backgroundColor": "#081D58"
+          }
+        }, {
+          "values": [3, 2, 3, 2, 3, 3, 1, 1, 2, 3],
+          "text": "1-2",
+          "legend-marker": {
+            "backgroundColor": "#fff"
+          },
+          "legend-item": {
+            "visible": false
+          }
+        }]
+      }]
+    };
+
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: 500,
+      width: '100%'
+    });
+  </script>
+</body>
+
+</html>
