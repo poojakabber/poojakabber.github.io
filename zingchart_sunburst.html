@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  </script>	<script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+  <script src="https://www.zingchart.com/scripts/zcDocs.js"></script>
+	<link href='https://www.zingchart.com/css/zcDocs.css' rel='stylesheet' type='text/css'>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    
+    #zc {
+      display: inline-block;
+    }
+    
+    #myChart {
+      height: 100%;
+      width: 100%;
+      min-height: 150px;
+    }
+    
+    .zc-ref {
+      display: none;
+    }
+    
+    #myChart-wrapper {}
+  </style>
+</head>
+
+<body>
+  <div id="zc"></div>
+  <pre id='output'></pre>
+  <script>
+    var fsdata = [{
+      "id": "flare",
+      "text": "Heather",
+      "parent": ""
+    }, {
+      "id": "aws",
+      "text": "aws",
+      "parent": "flare"
+    }, {
+      "id": "azure",
+      "text": "azure",
+      "parent": "aws"
+    }, {
+      "id": "revenue",
+      "text": "revenue",
+      "parent": "azure",
+      "value": 3938
+    }, {
+      "id": "cloud",
+      "text": "cloud",
+      "parent": "flare",
+      "value": 3812
+    }, {
+      "id": "easier workload",
+      "text": "easier workload",
+      "parent": "cloud",
+      "value": 6714
+    }, {
+      "id": "revenue",
+      "text": "revenue",
+      "parent": "cloud",
+      "value": 6000
+    }, {
+      "id": "compute usage",
+      "text": "compute usage",
+      "parent": "azure",
+      "value": 3212
+    }, {
+      "id": "azure margin",
+      "text": "azure margin",
+      "parent": "flare",
+      "value": 5000
+    }, {
+      "id": "material improvement",
+      "text": "material improvement",
+      "parent": "azure margin",
+      "value": 3200
+    }];
+
+    var cdata = {
+      "border-width": 1,
+      "border-color": "#000",
+      "background-color": "#fff",
+      "graphset": [{
+        "title": {
+          "text": "Irregular Sunburst - File System Data"
+        },
+        "type": "sunburst",
+        "plotarea": {
+          "border-width": 1,
+          "border-color": "#000",
+          "margin": "40 0 0 0"
+        },
+        "options": {
+          "space": 0,
+          "slice": 0,
+          "-palette": ['#F6842E', '#FBAC33', '#8AC340', '#46B863', '#41BC9F', '#29C2EC', '#387EC3', '#5253A3', '#764199', '#962871', '#C87F8A', '#F14F42'],
+        },
+        "scale-r": {
+          "-ref-angle": 180,
+          "-aperture": 180
+        },
+        "tooltip": {
+          "align": "left",
+          "thousands-separator": ","
+        },
+        "plot": {
+          "tooltip-text": "<span style='font-size:19px'>%plot-text</span><br/>Size: %node-value",
+          "alpha": 1,
+          "value-box": {
+            "color": "#fff",
+            "font-size": 10,
+            "visible": null,
+            "text": "%data-vbtext"
+          }
+        },
+        "series": fsdata
+      }]
+    };
+
+    zingchart.render({
+      id: 'zc',
+      width: 600,
+      height: 600,
+      data: cdata
+    });
+	
+	//zingchart.node_click = function(p) {
+		//zcdocs.demos.dump('node_click', p);
+	//}
+  </script>
+</body>
+
+</html>
