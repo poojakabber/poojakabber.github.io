@@ -1,0 +1,164 @@
+
+    {
+ 	type: "pie", 
+ 	title:{
+ 	  text: "Earnings Insights<br>Network and Tools",
+ 	  align: "right",
+ 	  fontColor: "#616161"
+ 	},
+ 	legend:{
+ 	  text:"%t<br>",
+ 	  width: 120,
+ 	  verticalAlign: "middle",
+ 	  borderWidth: 0,
+ 	  toggleAction: "remove",
+ 	  item:{
+ 	    padding: 5,
+      borderRadius: 3,
+      fontColor: "#fff",
+      align: "right",
+      width: 100
+ 	  },
+ 	  header:{
+ 	    text:"Network<br>and Tools",
+ 	    align: "right",
+ 	    fontSize: 13,
+ 	    bold: true,
+ 	    fontColor: "#616161"
+ 	  },
+ 	  itemOff:{
+ 	    alpha: 0.7,
+ 	    textAlpha: 1,
+ 	    fontColor: "#616161",
+ 	    textDecoration: "line-through",
+ 	    lineWidth: 2
+ 	  },
+ 	  markerOff:{
+ 	    alpha: 0.2
+ 	  }
+ 	},
+ 	plot:{
+ 	  refAngle: 270,
+ 	  decimals: 0,
+ 	  thousandsSeparator: ",",
+ 	  valueBox:{
+ 	    decimals: 2
+ 	  },
+ 	  animation:{
+ 	    effect: 3,
+ 	    method: 1,
+ 	    sequence: 1,
+ 	    onLegendToggle: false
+ 	  }
+ 	},
+ 	tooltip:{
+ 	  text:"%t<br>$%v",
+ 	  placement: "node:out",
+ 	  offsetR: 10,
+ 	  width: 110,
+ 	  fontColor: "#fff",
+ 	  borderRadius: 3,
+ 	  bold: true,
+ 	  align: "right"
+  },
+  scale:{
+    sizeFactor: 0.75
+  },
+	series : [
+		{
+			values : [26458795],
+			text:"Cloud Facilities",
+			backgroundColor: "#1976D2",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#1976D2",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#1976D2"
+			},
+			tooltip:{
+     	  		backgroundColor: "#1976D2"
+     		}
+		},
+		{
+			values : [21457845],
+			text:"Hardware",
+			backgroundColor: "#1E88E5",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#1E88E5",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#1E88E5"
+			},
+			tooltip:{
+     	  		backgroundColor: "#1E88E5"
+     		}
+		},
+		{
+			values : [18541547], //
+			text:"Software",
+			backgroundColor: "#2196F3",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#2196F3",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        backgroundColor: "#2196F3"
+			},
+			tooltip:{
+     	  		backgroundColor: "#2196F3"
+     		}
+		},
+		{
+			values : [18457845],
+			text:"Support Services",
+			backgroundColor: "#42A5F5",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#42A5F5",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        backgroundColor: "#42A5F5"
+			},
+			tooltip:{
+     	  		backgroundColor: "#42A5F5"
+     		}
+		},
+		{
+			values : [12587926],
+			text:"Security Solutions",
+			backgroundColor: "#64B5F6",
+			legendText: "%t<br><b>$%v</b>",
+			legendMarker:{
+			  type: "circle",
+			  size: 7,
+			  borderColor: "#64B5F6",
+			  borderWidth: 4,
+			  backgroundColor:"#fff"
+			},
+			legendItem:{
+        		backgroundColor: "#64B5F6"
+			},
+			tooltip:{
+     	  		backgroundColor: "#64B5F6"
+     		}
+		}
+	]
+}
