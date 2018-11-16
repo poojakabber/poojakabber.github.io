@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #myChart {
+      height: 100%;
+      width: 100%;
+      min-height: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='myChart'></div>
+  <script>
+    var originalConfig = {
+      "type": "ring",
+      "title": {
+        "text": "Drilldown Pie"
+      },
+      "plot": {
+        "detach": false,
+        "cursor": "hande",
+        "shadow": 8,
+        "value-box": {
+          "text":"%t",
+          "placement": "out"
+        }
+      },
+      "tooltip": {
+        "text": "%t: %v (%npv%)",
+        "border-radius": 5
+      },
+      "series": [{
+        "values": [69],
+        "background-color": "#F44336",
+        "text": "Azure",
+        "data-id": "azure"
+      }, {
+        "values": [69],
+        "background-color": "#009688",
+        "text": "AWS",
+        "data-id": "aws"
+      }, {
+        "values": [69],
+        "background-color": "#00BCD4",
+        "text": "Azure <br> Margin",
+        "data-id": "azure_margin"
+      }, {
+        "values": [69],
+        "background-color": "#03A9F4",
+        "text": "Cloud",
+        "data-id": "cloud"
+      }, {
+        "values": [69],
+        "background-color": "#673AB7",
+        "text": "ISV",
+        "data-id": "isv"
+      }],
+      "shapes": [{
+        'x': 25,
+        'y': 20,
+        'size': 10,
+        'angle': -90,
+        'type': 'triangle',
+        'background-color': '#C4C4C4',
+        'padding': 5,
+        'cursor': 'hand',
+        'id': 'backwards',
+        'hover-state': {
+          'border-width': 1,
+          'border-color': '#000'
+        }
+      }]
+    }
+
+    zingchart.render({
+      id: 'myChart',
+      data: originalConfig,
+      height: '100%',
+      width: '100%'
+    });
+
+
+
+    /**
+     * Create associative array to manage drilldown config
+     */
+    var drilldownDataStructure = [];
+    drilldownDataStructure["azure"] = {
+      "series": [{
+        "values": [10],
+        "text":"Revenue",
+        "background-color": "#EF5350",
+        "data-id":"revenue"
+      }, {
+        "values": [25],
+        "text": "Compute Usage",
+        "background-color": "#E53935",
+      }, {
+        "values": [34],
+        "text": "Classic server tools business",
+        "data-id": "classic_st_business",
+        "background-color": "#C62828"
+      }]
+    };
+    drilldownDataStructure["cloud"] = {
+      "series": [{
+        "values": [15],
+        "text": "Easier Workloads",
+        "background-color": "#26A69A",
+        "data-id":"easier_workloads"
+      }]
+    };
+    drilldownDataStructure["aws"] = {
+      "series": [{
+        "values": [20],
+        "text": "Azure",
+        "background-color": "#26C6DA",
+        "data-id":"aws_1"
+      }]
+    };
+
+    var drilldownDataStructure1 = [];
+    drilldownDataStructure1["revenue"] = {
+      "series": [{
+        "values": [10],
+        "text": "Momentum",
+        "background-color": "#EF5350"
+      }]
+    };
+
+    drilldownDataStructure1["easier_workloads"] = {
+      "series": [{
+        "values": [10],
+        "text": "Path",
+        "background-color": "#EF5350"
+      }]
+    };
+
+    drilldownDataStructure1["aws_1"] = {
+      "series": [{
+        "values": [10],
+        "text": "Gross Margin",
+        "background-color": "#EF5350"
+      }]
+    };
+
+    /*
+     * Built in zingchart API event used to capture node click events.
+     * Starting from this scope you will handle drilldown functionality.
+     */
+    zingchart.node_click = function(p) {
+      var plotIndex = p.plotindex;
+      var scaleText = p.scaletext;
+
+      // You could use this data to help construct drilldown graphs check it out...
+      //console.log(p);
+      if (drilldownDataStructure[p['data-id']]) {
+        zingchart.exec('myChart', 'setseriesdata', {
+          data: drilldownDataStructure[p['data-id']]['series']
+        });
+      }
+      else if (drilldownDataStructure1[p['data-id']]) {
+        zingchart.exec('myChart', 'setseriesdata', {
+          data: drilldownDataStructure1[p['data-id']]['series']
+        });
+      }
+    }
+
+    /*
+     * Handle history buttons. You can assign
+     * shapes id's and based on id you can go 
+     * 'forward' or 'backwards'. You could 
+     * also handle this with HTML and register
+     * click events to those DOM elements.
+     */
+    zingchart.shape_click = function(p) {
+      var shapeId = p.shapeid;
+      //console.log(p);
+
+      switch (shapeId) {
+        case 'forwards':
+        case 'backwards':
+        case 'default':
+          zingchart.exec('myChart', 'destroy');
+          zingchart.render({
+            id: 'myChart',
+            data: originalConfig,
+            height: '100%',
+            width: '100%'
+          });
+          break;
+      }
+    }
+  </script>
+</body>
+
+</html>
