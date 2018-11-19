@@ -3,7 +3,7 @@ function bubbleChart() {
 	height = 1960,
 	marginTop = 96,
 	minRadius = 12,
-	maxRadius = 50,
+	maxRadius = 45,
 	columnForColors = "category",
 	columnForTitle = "title",
 	columnForRadius = "views",
