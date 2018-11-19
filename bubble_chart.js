@@ -7,7 +7,7 @@ function bubbleChart() {
 	columnForColors = "category",
 	columnForTitle = "title",
 	columnForRadius = "views",
-	forceApart = -100,
+	forceApart = -300,
 	unitName="hearts",
 	customColors=false,
 	customRange,
