@@ -1,44 +1,15 @@
 title,category,views
-"How Flexbox works — explained with big, colorful, animated gifs",Design,5700
-How I went from zero experience to landing a 6-figure San Francisco design job in less than 12 months,Design,3700
-"I ranked every Intro to Data Science course on the internet, based on thousands of data points",Data Science,1600
-Nobody wants to use software,Development,2700
-A million requests per second with Python,Development,1100
-Material Design and the Mystery Meat Navigation Problem,Design,1100
-Lossless Web Navigation with Trails,Design,688
-How to use spaced repetition with Anki to learn to code faster,Development,756
-How to commit entire directories to GitHub directly from your browser using GitHub.js,Development,82
-"Every time you build a to-do list app, a puppy dies",Development,1500
-How to build your own Uber-for-X application part 2,Development,650
-How we got our 2-year-old repo trending on GitHub in just 48 hours,Data Science,718
-How making hundreds of hip hop beats helped me understand HTML and CSS,Development,506
-Scaling your Redux App with ducks,Development,315
-A Beginner’s JavaScript Study Plan,Development,672
-JavaScript’s Prototypal Inheritance Explained Using CSS,Development,519
-Tree-shaking ES6 Modules in webpack 2,Development,86
-3 JavaScript questions to watch out for during coding interviews,Development,1100
-Build a Node.js API in Under 30 Minutes,Development,343
-npm cache: the unsung hero,Development,122
-Code That Doesn't Exist Is The Code You Don't Need To Debug,Development,204
-A 5-minute Intro to Styled Components,Design,760
-How to land a top-notch tech internship — and a tech job — while you’re still in school,Development,1600
-"Firebase: the great, the meh, and the ugly",Development,407
-Which programming languages got the most GitHub stars in 2016?,Data Science,100
-ElasticSearch with Django the easy way,Development,115
-Git Please: how to force push without being a jerk,Development,66
-React Interview Questions,Development,389
-"React’s Five Fingers of Death. Master these five concepts, then master React",Development,1700
-How to set up ESLint in Atom so you can contribute to Open Source,Development,94
-"If you want a developer job, be fearless and dream big",Development,695
-Understanding Flexbox: Everything you need to know,Design,2200
-How I designed an algorithm that mixes playlists of bands coming to your town,Design,47
-How making hundreds of hip hop beats helped me understand HTML and CSS,Design,506
-WebSlides: a new open source way to build beautiful presentations that run in your browser,Design,747
-What I’ve learned from 18 weeks of vlogging my coding journey,Design,276
-How I used machine learning to explore the differences between British and American literature,Data Science,74
-The Rise of the Data Engineer,Data Science,862
-How to bootstrap your analytics in 1 hour,Data Science,90
-Rolling Stone’s 500 Greatest Albums Visualized Using Pandas and Bokeh,Data Science,48
-Recognizing Traffic Lights With Deep Learning,Data Science,1700
-Women only said 27% of the words in 2016’s biggest movies,Data Science,1000
-What I learned from analyzing the top 252 Medium stories of 2016,Data Science,2200
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",azure,5700
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",growth rate,3700
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",intelligent cloud,1600
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",cloud,2700
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",pricing,1100
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",azure hybrid benefit,1100
+"Amy and Satya, if I look at your Intelligent Cloud segment, and in particular the server products and cloud services, those continue to defy gravity a little bit here. And I'm just wondering if you could just give us a sense of how much maybe the pricing changes that went into effect at the beginning of the quarter that you're in now might have helped drive spending last quarter ahead of them going into effect. But also, can you share with us how the Azure Hybrid Benefit message might also be impacting Azure growth rate?",server products,688
+"I wanted to dig into capital efficiency here around your cloud assets a little bit. This quarter, you talked about Azure gross margins coming in sort of -- continuing to improve really nicely. CapEx came in, I mean, the growth there is slowing a little bit. Can you talk to us about sort of what's kind of driving that? Is it sort of the move to higher-level services? Do you get like better pricing against the capital? Is this sort of you're just not sort of pouring down as much cement, if you will, in terms of data expansion? Is it like better productivity of the core sort of compute stuff? Like can you help us understand sort of how capital intensity is trending in that -- Azure in particular but more broadly in the cloud businesses?",azure,756
+"I wanted to dig into capital efficiency here around your cloud assets a little bit. This quarter, you talked about Azure gross margins coming in sort of -- continuing to improve really nicely. CapEx came in, I mean, the growth there is slowing a little bit. Can you talk to us about sort of what's kind of driving that? Is it sort of the move to higher-level services? Do you get like better pricing against the capital? Is this sort of you're just not sort of pouring down as much cement, if you will, in terms of data expansion? Is it like better productivity of the core sort of compute stuff? Like can you help us understand sort of how capital intensity is trending in that -- Azure in particular but more broadly in the cloud businesses?",cloud,82
+"I wanted to dig into capital efficiency here around your cloud assets a little bit. This quarter, you talked about Azure gross margins coming in sort of -- continuing to improve really nicely. CapEx came in, I mean, the growth there is slowing a little bit. Can you talk to us about sort of what's kind of driving that? Is it sort of the move to higher-level services? Do you get like better pricing against the capital? Is this sort of you're just not sort of pouring down as much cement, if you will, in terms of data expansion? Is it like better productivity of the core sort of compute stuff? Like can you help us understand sort of how capital intensity is trending in that -- Azure in particular but more broadly in the cloud businesses?",pricing,1500
+"Amy, I'm wondering if you could talk about Azure, the outlook for the year. I know growth rate's been a bit volatile. I think you had a pretty strong Q4, including bookings in that business. Maybe you can help us understand relative to growth we're seeing right now how you expect the Azure trajectory to play out for the year?",azure,650
+"Amy, I'm wondering if you could talk about Azure, the outlook for the year. I know growth rate's been a bit volatile. I think you had a pretty strong Q4, including bookings in that business. Maybe you can help us understand relative to growth we're seeing right now how you expect the Azure trajectory to play out for the year?",growth rate,718
+"Maybe 2 for Amy. Just first on that KPI of Azure plus server products, that high teens number was obviously a lot better this quarter. But is that still the framework for the year?",azure,506
+"Maybe 2 for Amy. Just first on that KPI of Azure plus server products, that high teens number was obviously a lot better this quarter. But is that still the framework for the year?",server products,315
