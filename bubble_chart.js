@@ -139,7 +139,7 @@ function bubbleChart() {
 				return ".3em";//scaleRadius(d[columnForRadius])/4;
 			})
 			.text(function(d) {
-				return d[columnForTitle];
+				return d[columnForColors];
 			})
 			.on("mouseover", function(d) {
 				tooltip.html(d[columnForTitle] + "<br/>" + d[columnForColors] + "<br/>" + d[columnForRadius] + " "+ unitName);
