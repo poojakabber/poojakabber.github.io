@@ -1,3 +1,4 @@
+// closure - fn encapsulates all variables of the graph and sets the default values
 function bubbleChart() {
 	var width = 1960,
 	height = 1960,
@@ -14,7 +15,7 @@ function bubbleChart() {
 	customDomain,
 	chartSelection,
 	chartSVG,
-	showTitleOnCircle=false;
+	showTitleOnCircle=true;
 
 	/**
 	 * The command to actually render the chart after setting the settings.
@@ -29,6 +30,7 @@ function bubbleChart() {
 		svg.attr('width', width).attr('height', height);
 		chartSVG=svg;
 
+		// defines tooltip and its attributes
 		var tooltip = selection
 		.append("div")
 		.style("position", "absolute")
@@ -43,6 +45,10 @@ function bubbleChart() {
 		.text("");
 
 
+		// forceApart determines how far apart the circle will be. A positive value causes the circles to attract each other and negative value causes the circles to repel each other.
+		// d3.forceX and d3.forceY have 0 or nothing as parameters so the circles don't spread over the whole svg space.
+		// the force layout runs asynchronously. When force.start() is called, it starts doing its computations that determine the position of the nodes in parallel in the background.
+		// d3.forceManyBody() keeps updating the x and y position of each node, and the the ticked() function updates the DOM with these values (the cx and cy attributes)
 		var simulation = d3.forceSimulation(data)
 		.force("charge", d3.forceManyBody().strength([forceApart]))
 		.force("x", d3.forceX())
@@ -65,16 +71,24 @@ function bubbleChart() {
 			.range(customRange);
 		}
 	
+		// the size of the circle is proportional to the views/times column. To get the min and max value of that column,
+		// the + is a unary operator used to convert the following expression to a number
 		var minRadiusDomain = d3.min(data, function(d) {
 			return +d[columnForRadius];
 		});
 		var maxRadiusDomain = d3.max(data, function(d) {
 			return +d[columnForRadius];
 		});
+
+		// domain takes the min and max values of the views/times column 
+		// range determines the min and max values that the circle radii can be, that is the output values of the scale.
 		var scaleRadius = d3.scaleLinear()
 		.domain([minRadiusDomain, maxRadiusDomain])
 		.range([minRadius, maxRadius])
 
+		// creates the circles
+		// Here it says, I want as many circles as the number of elements in data and enter returns the selection (of divs) with the data bound to them and this selection is added to the DOM using append
+		// transform moves the circle to the middle of the svg, half the width and height.
 		var node = svg.selectAll("circle")
 		.data(data)
 		.enter()
@@ -96,6 +110,7 @@ function bubbleChart() {
 			tooltip.html(d[columnForTitle] + "<br/>" + d[columnForColors] + "<br/>" + d[columnForRadius] + " "+ unitName);
 			return tooltip.style("visibility", "visible");
 		})
+		//The mousemove follows the cursor when the mouse is moving. d3.event.pageX and d3.event.pageY return the mouse coordinates
 		.on("mousemove", function() {
 			return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 		})
@@ -141,11 +156,11 @@ function bubbleChart() {
 		svg.append('text')
 			.attr('x',width/2).attr('y',marginTop)
 			.attr("text-anchor", "middle")
-			.attr("font-size","1.8em")
-			.text(title);
+			.attr("font-size","1.8em");
+			// .text(title);
 	}
 
-
+	// properties set to accessors
 	chart.width = chartWidth;
 	chart.height = chartHeight;
 	chart.columnForColors = chartColForColors;
