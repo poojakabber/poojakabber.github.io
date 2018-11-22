@@ -148,8 +148,10 @@ function bubbleChart() {
 				return ".3em";//scaleRadius(d[columnForRadius])/4;
 			})
 			.text(function(d) {
-				text_width = getTextWidth(d[columnForColors], "bold 6pt arial");
+				var text_width = getTextWidth(d[columnForColors], "bold 6pt arial");
+				console.log('Before if statement text_width: '+text_width+' radius: '+d.r);
 				if (text_width < d.r) {
+					console.log('In if statement text_width: '+text_width+' radius: '+d.r);
 					return d[columnForColors];
 				}
 				return;
