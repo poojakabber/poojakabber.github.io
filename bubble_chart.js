@@ -22,6 +22,15 @@ function bubbleChart() {
 	 * @public
 	 * @param {string} selection - The div ID that you want to render in 
 	 */
+	function getTextWidth(text, font) {
+		// re-use canvas object for better performance
+		var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+		var context = canvas.getContext("2d");
+		context.font = font;
+		var metrics = context.measureText(text);
+		return metrics.width;
+	}
+
 	function chart(selection) {
 		var data = selection.datum();
 		chartSelection=selection;
@@ -139,7 +148,11 @@ function bubbleChart() {
 				return ".3em";//scaleRadius(d[columnForRadius])/4;
 			})
 			.text(function(d) {
-				return d[columnForColors];
+				text_width = getTextWidth(d[columnForColors], "bold 6pt arial");
+				if (text_width < d.r) {
+					return d[columnForColors];
+				}
+				return;
 			})
 			.on("mouseover", function(d) {
 				tooltip.html(d[columnForTitle] + "<br/>" + d[columnForColors] + "<br/>" + d[columnForRadius] + " "+ unitName);
@@ -429,6 +442,6 @@ function bubbleChart() {
 		}
 		return chart;
 	}
-	
+
 	return chart;
 }
