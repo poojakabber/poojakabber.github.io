@@ -149,7 +149,7 @@ function bubbleChart() {
 			})
 			.text(function(d) {
 				var text_width = getTextWidth(d[columnForColors], "bold 6px arial");
-				console.log('Before if statement text_width: '+text_width+' radius: '+d[columnForRadius]);
+				console.log('Before if statement text_width: '+text_width+' radius: '+scaleRadius(d[columnForRadius]));
 				if (text_width < scaleRadius(d[columnForRadius])) {
 					console.log('In if statement text_width: '+text_width+' radius: '+scaleRadius(d[columnForRadius]));
 					return d[columnForColors];
