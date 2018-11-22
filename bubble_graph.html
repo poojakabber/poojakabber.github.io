@@ -10,8 +10,11 @@
           console.error('Error getting or parsing the data.');
           throw error;
       }
+      // .width and .height to be configurable here requires accessors for the variables in the chart fn
       var chart = bubbleChart().width(700).height(500);
       // selection.datum() returns the bound datum for the first element in the selection and doesn't join the specified array of data with the selected elements
+      // d3.select allows DOM transformations
+      // Using selection.enter() to get the data, I think because of that it was skipping the first line. Now I’m using selection.datum() (which doesn’t join data with enter() and exit()) and now it renders all the data points
       d3.select('#chart').datum(data).call(chart);
     });
 </script>
