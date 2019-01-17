@@ -66,6 +66,7 @@ function bubbleChart() {
 
 		function ticked(e) {
 			node.attr("transform",function(d) {
+				console.log('DATA D: ', d);
 				console.log('D.X: ', d.x);
 				console.log('D.Y: ', d.y);
 				return "translate(" + [d.x+(width / 2), d.y+((height+marginTop) / 2)] +")";
